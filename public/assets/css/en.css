@@ -1,0 +1,98 @@
+html[dir="ltr"],
+html[dir="ltr"] body {
+    text-align: left;
+}
+
+html[dir="ltr"] header .header-main .main-menu-block .main-menu li.dropdown a::after {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+html[dir="ltr"] header .header-main .search-input {
+    background-position-x: right;
+    /* width: 65px; */
+}
+
+html[dir="ltr"] header .header-top .header-left .header-login ul li img {
+    margin-left: 0px;
+    margin-right: 10px;
+}
+
+html[dir="ltr"] header .header-top .top-menu ul li a {
+    border-left: 0px;
+    border-right: 1px solid rgb(248, 248, 248);
+}
+
+html[dir="ltr"] header .header-top .header-left .header-login ul li {
+    border-right: 0px;
+    border-left: 1px solid rgb(248, 248, 248);
+}
+
+html[dir="ltr"] .main-slider .slick-prev {
+    left: auto;
+}
+
+html[dir="ltr"] .right-page-img {
+    right: auto;
+    left: 0;
+    border-radius: 0 100% 100% 0;
+}
+
+html[dir="ltr"] .container-cart-massage .ml-auto {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
+
+html[dir="ltr"] .form-check-inline {
+    padding-left: .75rem;
+    margin-right: 0;
+}
+
+html[dir="ltr"] .other-products .block-item-product .item-other-product-block .down-block-product .price-porducts .new-price {
+    margin-right: 0;
+    margin-left: 15px;
+}
+
+html[dir="ltr"] .details-products-block-left .price-details-left .price-now-left .price-now {
+    font-size: 24px;
+}
+
+.details-products-block-left .price-details-left .price-now-left .w-offter {
+    padding: 0 6px;
+}
+
+html[dir="ltr"] .right-profile .menu-profile ul li a::after {
+    left: auto;
+    right: 0;
+    transform: rotate(180deg);
+}
+
+html[dir="ltr"] .right-profile .menu-profile ul li a img {
+    margin-left: 0;
+    margin-right: 15px;
+}
+
+html[dir="ltr"] .with-btn-update .btn-delete {
+    margin-left: 15px;
+    margin-right: 0;
+}
+
+html[dir="ltr"] .breadcrumb a::after {
+    transform: rotate(180deg);
+    display: inline-block;
+}
+
+html[dir="ltr"] .cart-right .details-products-block .details-item-cart .quantity-block-number .btn-dec-inc {
+    left: auto;
+    right: 15px;
+}
+
+html[dir="ltr"] .cart-right .details-products-block .details-item-cart .quantity-block-number input {
+    padding-left: 10px;
+}
+
+html[dir="ltr"] .booking-service h2::after,
+html[dir="ltr"] .customers h2::after,
+html[dir="ltr"] .projects-block-home h2:after {
+    transform: rotate(180deg);
+}
