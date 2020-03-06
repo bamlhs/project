@@ -1,4 +1,4 @@
-@extends("app")
+@extends("layout.layout")
 
 @section('content')
  
@@ -176,9 +176,9 @@
             </p>
             <form class="form-booking-home"  method="post" action="{{ action('ServiceController@StoreHome') }}">
                 <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-            <input type="text" lass="form-control" placeholder="{{ __("text.Name")}}"  name="name" id="name">
-                <input type="text" name="phone" id="phone" class="form-control" placeholder="{{ __("text.phone")}}">
-                <input type="text" class="form-control" placeholder="{{ __("text.address") }}"  name="address" id="address">
+            <input type="text" lass="form-control" placeholder="{{ __('text.Name')}}"  name="name" id="name">
+                <input type="text" name="phone" id="phone" class="form-control" placeholder="{{ __('text.phone')}}">
+                <input type="text" class="form-control" placeholder="{{ __('text.address') }}"  name="address" id="address">
             <button type="submit" class="btn btn-primary" >{{ __("text.Reserve-Now") }}</button>
             </form>
         </div>
@@ -194,7 +194,7 @@
                 <div class="item-now wow zoomIn animated " data-wow-delay="0.2s">
                     <img src="./assets/images/user-tie.svg" />
                     <div class="acount-number-now">1</div>
-                <div class="title-now"> {{ __("text.quality ") }}</div>
+                <div class="title-now"> {{ __('text.quality') }}</div>
                 </div>
 
                 <div class="item-now wow zoomIn animated " data-wow-delay="0.4s">
@@ -240,7 +240,7 @@
 
                 <div class="item-custom">
                     <a href="#" target="_blank">
-                    <img src="{{ asset("/assets/images/coustom3.png") }}" />
+                    <img src="{{ asset('/assets/images/coustom3.png') }}" />
                     </a>
 
                 </div>
@@ -306,7 +306,7 @@
         <div class="btn-colse-mail">X</div>
     <div class="desc-mail-right">{{ __("text.subscribe-offers") }}</div>
         <form>
-        <input type="email" class="form-control" placeholder="{{ __("text.emailOrphone") }}" />
+        <input type="email" class="form-control" placeholder="{{ __('text.emailOrphone') }}" />
             <button type="submit" class="btn btn-primary">إشترك</button>
         </form>
     </div>

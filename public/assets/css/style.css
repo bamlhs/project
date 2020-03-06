@@ -4075,4 +4075,71 @@
                             .__PrivateStripeElement {
                                 padding: 7px !important;
                             }
+
+                            .details-products-block-left .add-to-cart form {
+                                background: #AD7B38;
+                                display: inline-block;
+                                text-align: center;
+                                color: #ffffff;
+                                padding: 10px 0;
+                                margin-top: 30px;
+                                width: 100%;
+                                border-radius: 25px !important;
+                            }
+
+                            .details-products-block-left .add-to-cart form img {
+                                margin-left: 10px;
+                            }
+                            .details-products-block-left .add-to-cart form button {
+
+                            background: transparent;
+    border: 0;
+    color: white;
+}
+.left-cart-block .btn-cart-order button {
+    background: #AD7B38;
+    color: #ffffff;
+    border-radius: 25px !important;
+    font-size: 24px;
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin-top: 25px;
+    text-align: center;
+    border: none;
+}
+
+/**
+ * The CSS shown here will not be introduced in the Quickstart guide, but shows
+ * how you can use CSS to style your Element's container.
+ */
+ .StripeElement {
+    box-sizing: border-box;
+  
+    height: 40px;
+  
+    padding: 10px 12px;
+  
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: white;
+  
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+  }
+  
+  .StripeElement--focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+  }
+  
+  .StripeElement--invalid {
+    border-color: #fa755a;
+  }
+  
+  .StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
+  }
+
+  
                             /*# sourceMappingURL=style.css.map */

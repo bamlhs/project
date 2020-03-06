@@ -294,12 +294,13 @@ class ProductsController extends VoyagerBaseController
         $isModelTranslatable = is_bread_translatable($dataTypeContent);
 
         $view = 'voyager::bread.edit-add';
+        $options = ProductOption::all();
 
         if (view()->exists("voyager::$slug.edit-add")) {
             $view = "voyager::$slug.edit-add";
         }
 
-        return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable'));
+        return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable',"options"));
     }
 
     // POST BR(E)AD

@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+ 
 class Order extends Model
 {
     
@@ -13,7 +13,7 @@ public function user(){
 
 public function productOption()
 {
-    return $this->belongsToMany('App\ProductOption', "orders_product_option", "order_id" , "option_id");
+    return $this->belongsToMany('App\ProductOption', "orders_product_option", "order_id" , "option_id")->withPivot("quantity");
 }
 
 }

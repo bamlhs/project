@@ -1,0 +1,60 @@
+<?php
+return [
+    "Laundries" =>  "Laundries",
+    "Hotels" => "Hotels",
+    "Tools" => "Tools",
+    "Store" => "Store",
+    "Application" => "App",
+    "Register" => "Register",
+    "Signin" => "Sign in",
+    "Home" => "Home",
+    "Services" => "Services",
+    "HouseService" => "Home Service",
+    "Contact" => "Contact",
+    "Mail" => "Email",
+    "Password" => "Password",
+    "re-Password" => "re-Password",
+    "guest" => "You can Continue as a guest",
+    "Name" => "Name",
+    "send" => "Send",
+    "message" => "message",
+    "your-message" => "your message",
+    "msg-title" => "Message Title",
+    "phone" => "phone",
+    "subscribe" => "subscribe",
+    "getOurOffers" => "Get Our Offers",
+    "emailOrphone" => "email Or phone",
+    "be-aware" => "Get notified of out latest offers",
+    "Riyadh-saudi" => "Riyadh - Kingdom Of Saudi Arabia",
+    "work-time" => "You contact us during work time from 8 - 12 AM and 4 to 8 PM",
+    "privacy" => "Privacy Policy",
+    "reserved" => "All rights reserved",
+
+    "home-success" => "Our team is now working on your request",
+    "home-danger" => "An error ocurred. Please try again",
+
+   
+    "our-pride" => "اسطولنا الكبير والمجهز بمكائن عالية الجودة وطاقم مدرب على أعلى المستويات يقدم أفضل درجات الجودة والخدمة لعملائنا في منازلهم لغسيل جميع انواع السجاد والموكيت والأثاث والستائر",
+    "reservation" => "Reservation",
+    "HomeService" => "Home Service",
+    "catalog" => "Laundry Catalog",
+    "service-list" => "Services List",  
+    "related-links" => "Related Links",
+    "Reserve-Now" => "Reserve Now",
+    "quality" => "In Quality",
+    "experience-year" => "Year Of Experience",
+    "different-region" => "Different Region",
+    "requests" => "More Than Order",
+    "our-clients" => "Our Clients",
+    "subscribe-offers" => "Subscribe us to get our offers",
+    "carpets" => "Carpet Services",
+    "clothes" => "Clothes Services",
+    "ibayas" => "Abaya Services",
+    "towels" => "Towel Services",
+    "address" => "Address",
+
+
+
+
+    
+];

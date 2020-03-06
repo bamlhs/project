@@ -1,6 +1,8 @@
 @extends('layout.layout')
 
-    <div class="main-web">
+@section("content")
+
+<div class="main-web">
         <!--  Main web  -->
 
         <!-- service shop block -->
@@ -52,19 +54,18 @@
                     <div class="product-dept-shop">
                         <h2>الأقسام</h2>
                         <div class="row">
+                            @foreach($products as $product)
+                            @php
+                            $image = json_decode($product->image);
+                            @endphp
                             <div class="col-md-6 item-product-dept">
-                                <a href="./details-products.html">
-                                    <img src="assets/images/product2.jpg" />
-                                    <h3>صوابين عادية</h3>
+                                <a href="{{ route('single', $product->id) }}">
+                                    <img src="{{ URL::asset('storage/'.$image[0]) }}" />
+                                    <h3>{{  $product->name }}</h3>
                                 </a>
                             </div>
 
-                            <div class="col-md-6 item-product-dept">
-                                <a href="./details-products-auto.html">
-                                    <img src="assets/images/product1.jpg" />
-                                    <h3>صوابين اوتوماتيك</h3>
-                                </a>
-                            </div>
+                            @endforeach
 
                         </div>
                     </div>
@@ -155,3 +156,5 @@
 
     </div>
     <!-- End  Main web  -->
+
+@endcontent
