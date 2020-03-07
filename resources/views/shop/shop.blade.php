@@ -157,4 +157,4 @@
     </div>
     <!-- End  Main web  -->
 
-@endcontent
+@endsection

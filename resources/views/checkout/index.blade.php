@@ -1,10 +1,7 @@
 
 @extends('layout.layout')
 
- 
-
 @section("content")
-
 
 <div class="main-web">
     <!--  Main web  -->
@@ -15,7 +12,7 @@
             <span>تأكيد الطلب</span>
 
         </div>
-
+    <form action="{{ route('payment') }}" method="POST">
         <div class="row container-confirm-form">
             <div class="col-md-9 right-details  confirm-right confirm-form">
                 <!-- Prosnal data Block -->
@@ -24,10 +21,10 @@
                     <div class="data-block-form">
                         <div class="form-row">
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="الإسم">
+                                <input type="text" name="name" class="form-control" placeholder="الإسم" value="{{(Auth::user()) ? $profile->name : ''}}">
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="رقم الجوال">
+                                <input type="text" name="phone" class="form-control" placeholder="رقم الجوال"  value="{{(Auth::user()) ? $profile->phone : ''}}">
                             </div>
                         </div>
                     </div>
@@ -38,31 +35,25 @@
                     <div class="data-block-form">
                         <div class="form-row">
                             <div class="col">
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option selected>المنطقة</option>
-                                    <option>1 المنطقة</option>
-                                    <option>2 المنطقة</option>
-                                    <option>3 المنطقة</option>
-                                    <option>4 المنطقة</option>
-                                    <option>5 المنطقة</option>
-                                </select>
+                                <input type="text" name="province" class="form-control" placeholder="المنطقة"  value="{{(Auth::user())? $profile->province : ''}}">
+
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="المدينة">
+                                <input type="text" name="city" class="form-control" placeholder="المدينة"  value="{{(Auth::user())? $profile->city : ''}}">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="الحي">
+                                <input type="text" name="block" class="form-control" placeholder="الحي"  value="{{(Auth::user())? $profile->block : ''}}">
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="الشارع">
+                                <input type="text" name="street" class="form-control" placeholder="الشارع"  value="{{(Auth::user())? $profile->street : ''}}">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col">
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="تفاصيل إضافية"></textarea>
+                                <textarea class="form-control" name="place_extra" id="exampleFormControlTextarea1" rows="3" placeholder="تفاصيل إضافية" value="{{(Auth::user())? $profile->place_extra : '' }}"></textarea>
                             </div>
                         </div>
                     </div>
@@ -75,12 +66,12 @@
 
                         <div class="form-row">
                             <div class="col">
-                                <input type="radio" id="pamyment1" name="pamyment" class="custom-control-input">
-                                <label class="custom-control-label" for="pamyment1">الدفع كاش عند الإستلام</label>
+                                <input type="radio" id="payment1" name="payment" class="custom-control-input">
+                                <label class="custom-control-label" for="payment1">الدفع كاش عند الإستلام</label>
                             </div>
                             <div class="col">
-                                <input type="radio" id="pamyment2" name="pamyment" class="custom-control-input">
-                                <label class="custom-control-label" for="pamyment2">
+                                <input type="radio" id="payment2" name="payment" class="custom-control-input">
+                                <label class="custom-control-label" for="payment2">
                                     الدفع أونلاين عن طريق بطاقة فيزا أو مدى
                                 </label>
                             </div>
@@ -94,7 +85,7 @@
                     <div class="data-block-form">
                         <div class="form-row">
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="إسم حامل البطاقة">
+                                <input type="text" name="holder" class="form-control" placeholder="إسم حامل البطاقة">
                             </div>
                             {{-- <div class="col">
                                 <input type="text" class="form-control" placeholder="رقم البطاقة">
@@ -173,36 +164,40 @@
                     </div>
                 </div>
 
-                <!-- details-order-blocks -->
-                <div class="details-order-blocks">
-                    <div class="order-blocks">
-                        <h4>تفاصيل الطلب</h4>
-
-                        <div class="item-order-details-block">
-                            <!-- Item -->
-                            <div class="item-order-details">
-                                <div class="col-md-2 img-pro-cart">
-                                    <img src="assets/images/img-inner-cart.jpg" />
-                                </div>
-
-                                <div class="col-md-6 products-name-data">
-                                    <div class="name-product"> الرهدن للملابس البيضاء 6 كجم </div>
-                                    <div class="desc-details-product">6 كجم</div>
-                                </div>
-                                <div class="col-md-2 quantity-numner-details"><span> 1 </span></div>
-                                <div class="col-md-2 price-product-order">79 ر.س</div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="totlal-order-bootom">
-                        الإجمالي: <span>{{ Cart::Total() }} ر.س</span>
-                    </div>
-
-                </div>
-
+             
 
             </div>
+   <!-- details-order-blocks -->
+   <div class="details-order-blocks">
+    <div class="order-blocks">
+        <h4>تفاصيل الطلب</h4>
+
+        <div class="item-order-details-block">
+           @foreach (Cart::content() as $item)
+           @php
+                            $image = json_decode($item->model->image);
+                 @endphp
+                <!-- Item -->
+            <div class="item-order-details">
+                <div class="col-md-2 img-pro-cart">
+                    <img src="{{ URL::asset('storage/'.$image[0]) }}" height="100" width="100" />
+                </div>
+
+                <div class="col-md-6 products-name-data">
+                    <div class="name-product"> {{ $item->name  }} </div>
+                </div>
+                <div class="col-md-2 quantity-numner-details"><span> {{ $item->qty }} </span></div>
+                <div class="col-md-2 price-product-order">{{ $item->price }} ر.س</div>
+            </div>
+           @endforeach
+
+        </div>
+    </div>
+    <div class="totlal-order-bootom">
+        الإجمالي: <span>{{ Cart::Total() }} ر.س</span>
+    </div>
+</form>
+</div>
 
 
          
@@ -233,7 +228,10 @@
 
     </div>
 
-</div>
+
+
+
+</form></div>
     </div>
     <!-- service shop block -->
     <div class="service-shop-block service-footer-shop">
@@ -271,86 +269,4 @@
 <!-- End  Main web  -->
 
 
-@endsection
-
-
-
-@section('extra_scripts')
-    <script>
-
-        (function(){
-                    // Create a Stripe client.
-var stripe = Stripe('pk_test_oAfrMNbwX7nC03o4bUUaR2iT0066r3OVQl');
-
-// Create an instance of Elements.
-var elements = stripe.elements();
-
-// Custom styling can be passed to options when creating an Element.
-// (Note that this demo uses a wider set of styles than the guide below.)
-var style = {
-  base: {
-    color: '#32325d',
-    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-    fontSmoothing: 'antialiased',
-    fontSize: '16px',
-    '::placeholder': {
-      color: '#aab7c4'
-    }
-  },
-  invalid: {
-    color: '#fa755a',
-    iconColor: '#fa755a'
-  }
-};
-
-// Create an instance of the card Element.
-var card = elements.create('card', {style: style});
-
-// Add an instance of the card Element into the `card-element` <div>.
-card.mount('#card-element');
-
-// Handle real-time validation errors from the card Element.
-card.addEventListener('change', function(event) {
-  var displayError = document.getElementById('card-errors');
-  if (event.error) {
-    displayError.textContent = event.error.message;
-  } else {
-    displayError.textContent = '';
-  }
-});
-
-// Handle form submission.
-var form = document.getElementById('payment-form');
-form.addEventListener('submit', function(event) {
-  event.preventDefault();
-
-  stripe.createToken(card).then(function(result) {
-    if (result.error) {
-      // Inform the user if there was an error.
-      var errorElement = document.getElementById('card-errors');
-      errorElement.textContent = result.error.message;
-    } else {
-      // Send the token to your server.
-      stripeTokenHandler(result.token);
-    }
-  });
-});
-
-// Submit the form with the token ID.
-function stripeTokenHandler(token) {
-  // Insert the token ID into the form so it gets submitted to the server
-  var form = document.getElementById('payment-form');
-  var hiddenInput = document.createElement('input');
-  hiddenInput.setAttribute('type', 'hidden');
-  hiddenInput.setAttribute('name', 'stripeToken');
-  hiddenInput.setAttribute('value', token.id);
-  form.appendChild(hiddenInput);
-
-  // Submit the form
-  form.submit();
-}
-        });
-
-
-    </script>
 @endsection

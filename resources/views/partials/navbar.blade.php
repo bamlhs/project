@@ -7,10 +7,10 @@
                     <div class="col-md-6">
                         <div class="top-menu">
                             <ul>
-                                <li><a href="#">Laundry</a></li>
-                                <li><a href="#">Tools</a></li>
-                                <li><a href="#">Hotel Services</a></li>
-                                <li><a href="shop-en.html">Store</a></li>
+                            <li><a href="{{ route("laundry") }}">Laundry</a></li>
+                                <li><a href="{{ route('tools')}}">Tools</a></li>
+                                <li><a href="{{ route('hotels')}}">Hotel Services</a></li>
+                                <li><a href="{{ route('shop')}}">Store</a></li>
                             </ul>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                                     <li><a href="{{ url('locale/ar') }}" ><i class="fa fa-language"></i> AR</a></li>
                                     @endif
                                     <li>
-                                        <a href="cart-en.html" class="icon-cart">
+                                        <a href="{{ route('cart') }}" class="icon-cart">
                                             <img src="assets/images/cart.svg" />
                                             <span class="number-item-cart">{{ Cart::Count() }}</span>
                                         </a>

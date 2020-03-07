@@ -18,11 +18,11 @@ class CartController extends Controller
             'newTotal' => $this->getNumbers()->get('newTotal'),
             "shipping" => $this->getNumbers()->get("shipping"),
         ]);
-
+            
     }
 
     public function changeQuantity(Request $request, $id){
-        Cart::update($id, $request->quantity);
+        Cart::update($id,["quantity" => $request->quantity]);
         return response()->json(['success',  true]);
     }
 

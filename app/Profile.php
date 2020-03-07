@@ -9,7 +9,7 @@ class Profile extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['name', 'phone', 'gender', 'birth-date', 'province', 'city', 'block', 'street', 'place-extra','user_id'];
+    protected $fillable = ['name', 'phone', 'gender', 'birth-date', 'province', 'city', 'block', 'street', 'place_extra','user_id'];
 
     public function user(){
         return $this->belongsTo("App\User");

@@ -155,7 +155,7 @@
 
                                 <div class="form-row">
                                     <div class="col">
-                                        <textarea name="place" id="place" class="form-control"  rows="3" placeholder="تفاصيل إضافية"  value="{{  old('place', $profile->place_extra ) }}"></textarea>
+                                        <textarea name="place_extra" id="place" class="form-control"  rows="3" placeholder="تفاصيل إضافية"  value="{{  old('place', $profile->place_extra ) }}"></textarea>
                                     </div>
                                 </div>
                             </div>

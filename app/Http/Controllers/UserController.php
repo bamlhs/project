@@ -45,7 +45,7 @@ class UserController extends Controller
             'city' => $request->city,
             'block' => $request->block,
             'street' => $request->street,
-            'place_extra' =>  $request->place,
+            'place_extra' =>  $request->place_extra,
             'user_id' => Auth::id(),
         ]);
 

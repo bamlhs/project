@@ -3,12 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CheckoutController extends Controller
 {
     public function index(){
+       
+        
+
+        $profile =  (Auth::user()) ? Profile::where("user_id", Auth::id())->first() : '';
+ 
+
         return View("checkout.index")->with([
             'tax' => $this->getNumbers()->get('tax'),
             'discount' => $this->getNumbers()->get('discount'),
@@ -16,6 +24,7 @@ class CheckoutController extends Controller
             'newTax' => $this->getNumbers()->get('newTax'),
             'newTotal' => $this->getNumbers()->get('newTotal'),
             "shipping" => $this->getNumbers()->get("shipping"),
+            "profile" => $profile,
         ]);
     }
 
@@ -24,6 +33,8 @@ class CheckoutController extends Controller
         $contents = Cart::content()->map(function($item){
             return $item->model->name .', '. $item->qty;
         });
+
+        dd($contents);
 
         return View("checkout.payment");
     }
