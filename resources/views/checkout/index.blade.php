@@ -1,10 +1,7 @@
-@inject('paytabs', 'App\Paytabs')
 
 @extends('layout.layout')
 
-@section('extra_styles')
-    <script src="https://js.stripe.com/v3/"></script>
-@endsection
+ 
 
 @section("content")
 
@@ -105,12 +102,10 @@
                         </div>
 
                         <div class="form-row">
-                         
-                   
+                                            
                             <?php
  /*
                             $pt = new paytabs("amiranis2012@gmail.com", "gMa3YRRsruaesOmWkBKRwB696vasLx12kb5i3WKurVIUK4Q4GBWcc2mixwLj4MloYrH2oswPneJ8jAcZb8cnayGI5s29enxdOffc");
-
                             $pt->create_pay_page(
                                 array(
                                     "merchant_email" => "amiranis2012@gmail.com",
@@ -210,28 +205,35 @@
             </div>
 
 
-            <!-- Left Cart -->
-            <div class="col-md-3 left-details cart-left  confirm-left">
-                <div class="details-products-block-left  left-cart-block left-confirm-block  block-coupon">
-                    <h6>لديك كوبون؟</h6>
-                    <form>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="الرجاء إدخال الكوبون">
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-link-confirm">تفعيل الكوبون</button>
-                    </form>
-
-                </div>
-                <div class="details-products-block-left  left-cart-block left-confirm-block block-total-confirm ">
-                    <div class="total-confirm">الإجمالي: <span class="price-total-confirm">{{ Cart::total() }} ر.س</span></div>
-                    <p>بالضغط على تأكيد الطلب أقر بأنني قرأت وفهمت كل ما يتعلق بالشروط و الأحكام.</p>
-                <a class="btn-link-confirm" href="{{ route('confirm') }}">تأكيد الطلب</a>
-
-                </div>
-
-            </div>
+         
         </div>
+   <!-- Left Cart -->
+   <div class="col-md-3 left-details cart-left  confirm-left">
+    <div class="details-products-block-left  left-cart-block left-confirm-block  block-coupon">
+        <h6>لديك كوبون؟</h6>
+        <form method="post" action="{{ route('add_coupon') }}">
+            @csrf
+            <div class="form-group">
+                <input type="text" name="coupon_code" id="coupon_code" class="form-control" placeholder="الرجاء إدخال الكوبون">
+            </div>
+            <button type="submit" class="btn btn-primary btn-link-confirm">تفعيل الكوبون</button>
+        </form>
 
+    </div>
+    <div class="details-products-block-left  left-cart-block left-confirm-block block-total-confirm ">
+        @if (Session()->has("coupon"))
+        
+        <div class="total-confirm">التخفيض: {{ Session()->get("coupon")['name']}} <span class="price-total-confirm">{{ Session()->get("coupon")['discount']}} ر.س</span></div>
+        @endif
+        <div class="total-confirm">التوصيل: <span class="price-total-confirm">{{ $shipping }} ر.س</span></div>
+
+        <div class="total-confirm">الإجمالي: <span class="price-total-confirm">{{ $newTotal }} ر.س</span></div>
+        <p>بالضغط على تأكيد الطلب أقر بأنني قرأت وفهمت كل ما يتعلق بالشروط و الأحكام.</p>
+    <a class="btn-link-confirm" href="{{ route('confirm') }}">تأكيد الطلب</a>
+
+    </div>
+
+</div>
     </div>
     <!-- service shop block -->
     <div class="service-shop-block service-footer-shop">

@@ -10,8 +10,20 @@ class CartController extends Controller
     
     public function index(){
 
-        return View("cart.index");
+        return View("cart.index")->with([
+            'tax' => $this->getNumbers()->get('tax'),
+            'discount' => $this->getNumbers()->get('discount'),
+            'newSubtotal' => $this->getNumbers()->get('newSubtotal'),
+            'newTax' => $this->getNumbers()->get('newTax'),
+            'newTotal' => $this->getNumbers()->get('newTotal'),
+            "shipping" => $this->getNumbers()->get("shipping"),
+        ]);
 
+    }
+
+    public function changeQuantity(Request $request, $id){
+        Cart::update($id, $request->quantity);
+        return response()->json(['success',  true]);
     }
 
     public function empty(){
@@ -37,9 +49,28 @@ class CartController extends Controller
                      'price' => $product->price,
                      "weight" => "5",
                  ]);
-            
+ 
                  Cart::associate($cartItem->rowId, 'App\Product');
                  return redirect()->route('cart');
             }
+        }
+
+        private function getNumbers(){
+            $tax = config('cart.tax') / 100;
+            $discount = session()->get('coupon')['discount'] ?? 0;
+            $newSubtotal = (Cart::total() - $discount);
+            $newTax = $newSubtotal * $tax;
+            $shipping = ($newSubtotal > 200) ? 0 : "20";
+            $newTotal = ($newSubtotal * (1+ $tax)) + $shipping;
+            
+     
+            return collect([
+                'tax' => $tax,
+                'discount' => $discount,
+                'newSubtotal' => $newSubtotal,
+                'newTax' => $newTax,
+                'newTotal' => $newTotal,
+                "shipping" => $shipping,
+            ]);
         }
     }

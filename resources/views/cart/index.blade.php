@@ -52,12 +52,12 @@
                 </div>
 
                 <div class="products-name-data">
-                    <div class="name-product"> الرهدن للملابس البيضاء 6 كجم </div>
-                    <div class="desc-details-product">6 كجم</div>
-                </div>
+                    <div class="name-product">{{ $item->name }} </div>
+                 </div>
 
                 <div class="quantity-container quantity-block-number">
-                    <input type="text" class="quantity-amount number-quantity" name="" value="0" />
+                    <input type="text" class="quantity-amount number-quantity" name="" value="{{ $item->qty }}" 
+                    data-id="{{ $item->rowId }}" />
                     <div class=" btn-dec-inc ">
                         <button class="increase value-button btn-inc" type="button" title="Increase Quantity">+</button>
                         <button class="decrease value-button btn-dec" type="button" title="Decrease Quantity">-</button>
@@ -66,7 +66,7 @@
 
 
 
-                <div class="price-product-cart">79 ر.س</div>
+                <div class="price-product-cart">{{ $item->price }} ر.س</div>
 
                 <button type="button" class="btn btn-link delete-product">
                     <img src="assets/images/delete.svg" />
@@ -102,12 +102,12 @@
                     </div>
                     <div class="total-price-order">
                         <div class="lable-desc">سعر التوصيل:</div>
-                        <div class="fld-desc">15 ر.س</div>
+                        <div class="fld-desc">{{ $shipping }} ر.س</div>
                     </div>
                     <div class="btn-cart-order">
                         <form action="{{ route('checkout') }}">
                         <button type="submit">
-                            شراء ( <span>3 منتجات</span> )
+                            شراء ( <span>{{ Cart::count() }} منتجات</span> )
                          </a>
                     </div>
                 </form>
@@ -154,4 +154,34 @@
 </div>
 <!-- End  Main web  -->
     
+@endsection
+
+
+@section('extra_scripts')
+    
+
+    <script>
+
+        (function(){
+            const classname = document.querySelectorAll('.quantity-amount');
+
+            Array.from(classname).forEach(function(element){
+                element.addEventListener('change', function(){
+                    const id = element.getAttribute("data-id");
+                    axios.patch(`/cart-qty/${id}`,{
+                        quantity: this.value
+                    })
+                    .then(function(response){
+                        window.location.href = '{{ route("cart") }}'
+                    })
+                    .catch(function(error){
+
+                    });
+                })
+            });
+        });
+
+    </script>
+
+
 @endsection
