@@ -51,8 +51,16 @@ class UserController extends Controller
 
      return redirect()->route('profile');
         
-
     }
 
+    public function orders(){
 
+        $orders = DB::table('orders')->where('user_id', Auth::id())
+        ->join('orders_products', 'orders.id', '=', 'orders_products.order_id')
+        ->join('products', 'orders_products.product_id', '=', 'products.id')
+        ->select('orders.id', 'products.*', 'orders_products.quantity')
+        ->get();
+
+        return View("profile", ["profile" => $profile]);
+    }
 }

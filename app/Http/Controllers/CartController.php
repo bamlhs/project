@@ -18,7 +18,7 @@ class CartController extends Controller
             'newTotal' => $this->getNumbers()->get('newTotal'),
             "shipping" => $this->getNumbers()->get("shipping"),
         ]);
-            
+        
     }
 
     public function changeQuantity(Request $request, $id){

@@ -1,6 +1,6 @@
-
+ 
 @extends('layout.layout')
-
+ 
 @section("content")
 
 <div class="main-web">
@@ -13,6 +13,7 @@
 
         </div>
     <form action="{{ route('payment') }}" method="POST">
+        @csrf
         <div class="row container-confirm-form">
             <div class="col-md-9 right-details  confirm-right confirm-form">
                 <!-- Prosnal data Block -->
@@ -21,10 +22,10 @@
                     <div class="data-block-form">
                         <div class="form-row">
                             <div class="col">
-                                <input type="text" name="name" class="form-control" placeholder="الإسم" value="{{(Auth::user()) ? $profile->name : ''}}">
+                                <input type="text" name="name" class="form-control" placeholder="الإسم" value="{{(Auth::user() && $profile) ? $profile->name : ''}}">
                             </div>
                             <div class="col">
-                                <input type="text" name="phone" class="form-control" placeholder="رقم الجوال"  value="{{(Auth::user()) ? $profile->phone : ''}}">
+                                <input type="text" name="phone" class="form-control" placeholder="رقم الجوال"  value="{{(Auth::user() && $profile) ? $profile->phone : ''}}">
                             </div>
                         </div>
                     </div>
@@ -35,25 +36,25 @@
                     <div class="data-block-form">
                         <div class="form-row">
                             <div class="col">
-                                <input type="text" name="province" class="form-control" placeholder="المنطقة"  value="{{(Auth::user())? $profile->province : ''}}">
+                                <input type="text" name="province" class="form-control" placeholder="المنطقة"  value="{{(Auth::user() && $profile)? $profile->province : ''}}">
 
                             </div>
                             <div class="col">
-                                <input type="text" name="city" class="form-control" placeholder="المدينة"  value="{{(Auth::user())? $profile->city : ''}}">
+                                <input type="text" name="city" class="form-control" placeholder="المدينة"  value="{{(Auth::user() && $profile)? $profile->city : ''}}">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <input type="text" name="block" class="form-control" placeholder="الحي"  value="{{(Auth::user())? $profile->block : ''}}">
+                                <input type="text" name="block" class="form-control" placeholder="الحي"  value="{{(Auth::user() && $profile)? $profile->block : ''}}">
                             </div>
                             <div class="col">
-                                <input type="text" name="street" class="form-control" placeholder="الشارع"  value="{{(Auth::user())? $profile->street : ''}}">
+                                <input type="text" name="street" class="form-control" placeholder="الشارع"  value="{{(Auth::user() && $profile)? $profile->street : ''}}">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col">
-                                <textarea class="form-control" name="place_extra" id="exampleFormControlTextarea1" rows="3" placeholder="تفاصيل إضافية" value="{{(Auth::user())? $profile->place_extra : '' }}"></textarea>
+                                <textarea class="form-control" name="place_extra" id="exampleFormControlTextarea1" rows="3" placeholder="تفاصيل إضافية" value="{{(Auth::user() && $profile)? $profile->place_extra : '' }}"></textarea>
                             </div>
                         </div>
                     </div>
@@ -66,11 +67,11 @@
 
                         <div class="form-row">
                             <div class="col">
-                                <input type="radio" id="payment1" name="payment" class="custom-control-input">
+                                <input type="radio" id="payment1" value="0" name="payment_method" class="custom-control-input" checked>
                                 <label class="custom-control-label" for="payment1">الدفع كاش عند الإستلام</label>
                             </div>
                             <div class="col">
-                                <input type="radio" id="payment2" name="payment" class="custom-control-input">
+                                <input type="radio" id="payment2" value='1' name="payment_method" class="custom-control-input">
                                 <label class="custom-control-label" for="payment2">
                                     الدفع أونلاين عن طريق بطاقة فيزا أو مدى
                                 </label>
@@ -95,46 +96,49 @@
                         <div class="form-row">
                                             
                             <?php
- /*
-                            $pt = new paytabs("amiranis2012@gmail.com", "gMa3YRRsruaesOmWkBKRwB696vasLx12kb5i3WKurVIUK4Q4GBWcc2mixwLj4MloYrH2oswPneJ8jAcZb8cnayGI5s29enxdOffc");
-                            $pt->create_pay_page(
+
+                            $merchant_email = "amiranis2012@gmail.com";
+                            $mechant_key = "gMa3YRRsruaesOmWkBKRwB696vasLx12kb5i3WKurVIUK4Q4GBWcc2mixwLj4MloYrH2oswPneJ8jAcZb8cnayGI5s29enxdOffc";
+                           
+                            $paytabs = new paytabs($merchant_email,$mechant_key);
+ 
+                            $paytabs->create_pay_page(
                                 array(
-                                    "merchant_email" => "amiranis2012@gmail.com",
-                                    "secret_key" => "gMa3YRRsruaesOmWkBKRwB696vasLx12kb5i3WKurVIUK4Q4GBWcc2mixwLj4MloYrH2oswPneJ8jAcZb8cnayGI5s29enxdOffc",
-                                    "site_url" => "http://127.0.0.1:8000/checkout",
-                                    "return_url" => "http://localhost/gateway",
+                                    "merchant_email" => $merchant_email,
+                                    "secret_key" => $mechant_key,
+                                    "site_url" => "http://127.0.0.1:8000",
+                                    "return_url" => "http://127.0.0.1:8000/gateway",
                                     "title" => "JohnDoe And Co.",
-                                    "cc_first_name" => "John",
-                                    "cc_last_name" => "Doe",
                                     "cc_phone_number" => "00973",
                                     "phone_number" => "123123123456",
                                     "email" => "johndoe@example.com",
+                                    "ip_customer" => {{ $_SERVER['REMOTE_ADDR'] }},
+                                    "ip_merchant" =>  {{ $_SERVER['SERVER_ADDR'] }},
                                     "products_per_title" => "MobilePhone || Charger || Camera",
                                     "unit_price" => "12.123 || 21.345 || 35.678 ",
                                     "quantity" => "2 || 3 || 1",
                                     "other_charges" => "12.123",
-                                    "amount" => "136.082",
-                                    "discount" => "10.123",
+                                    "amount" => "{{ $newTotal }}"
+                                    "discount" => "{{$discount }}",
                                     "currency" => "SAR",
                                     "reference_no" => "ABC-123",
-                                    "ip_customer" =>"1.1.1.0",
-                                    "ip_merchant" =>"1.1.1.0",
-                                    "billing_address" => "Flat 3021 Manama Bahrain",
-                                    "city" => "Manama",
-                                    "state" => "Manama",
+                                    'SERVER_ADDR' => 'localhost',
+                                    "city" => "Riyadh",
+                                    "state" => "Riyadh",
+                                    "state_shipping" => "Riyadh",
+                                    "city_shipping" => "Riyadh",
                                     "postal_code" => "12345",
                                     "country" => "SA",
                                     "shipping_first_name" => "John",
+                                    "cc_first_name" => "John",
+                                    "cc_last_name" => "Doe",
                                     "shipping_last_name" => "Doe",
-                                    "address_shipping" => "Flat 3021 Manama Bahrain",
-                                    "state_shipping" => "Manama",
-                                    "city_shipping" => "Manama",
                                     "postal_code_shipping" => "1234",
                                     "country_shipping" => "BHR",
                                     "msg_lang" => "English",
                                     )); 
                           
-                          */
+                          
                                     ?>
 
                         {{-- <div class="form-row">
@@ -224,7 +228,7 @@
 
         <div class="total-confirm">الإجمالي: <span class="price-total-confirm">{{ $newTotal }} ر.س</span></div>
         <p>بالضغط على تأكيد الطلب أقر بأنني قرأت وفهمت كل ما يتعلق بالشروط و الأحكام.</p>
-    <a class="btn-link-confirm" href="{{ route('confirm') }}">تأكيد الطلب</a>
+    <button type="submit" class="btn-link-confirm">تأكيد الطلب</a>
 
     </div>
 

@@ -4,18 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\Profile;
+use App\OrderProduct;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Validator;
 
 class CheckoutController extends Controller
 {
     public function index(){
        
-        
-
         $profile =  (Auth::user()) ? Profile::where("user_id", Auth::id())->first() : '';
  
+        if(Cart::count()<1){
+            return redirect()->route('shop');
+        }
 
         return View("checkout.index")->with([
             'tax' => $this->getNumbers()->get('tax'),
@@ -25,16 +29,83 @@ class CheckoutController extends Controller
             'newTotal' => $this->getNumbers()->get('newTotal'),
             "shipping" => $this->getNumbers()->get("shipping"),
             "profile" => $profile,
+            "paytabs" =>  App::make('App\paytabs'),
         ]);
     }
+ 
+
+
+
+
+
+
+
+
+
+
 
     public function payment(Request $request){
 
-        $contents = Cart::content()->map(function($item){
-            return $item->model->name .', '. $item->qty;
-        });
+    //     $contents = Cart::content()->map(function($item){
+    //         return $item->model->name .', '. $item->qty;
+    //     });
+    //    // dd($contents);
+     
+     // dd( $request->place_extra);
+        
+     $contents = Cart::content()->map(function($item){
+                 return $item->model->name .', '. $item->qty .'.';
+         });
 
-        dd($contents);
+
+     Validator::make($request->all(), [
+        'name' => 'required|max:100',
+        'phone' => 'required|phone:sa',
+        'province' => 'required',
+        'city' => 'required',
+        'block' => 'required',
+        'street' => 'required',
+        'payment_method' => 'required',
+    ])->validate();
+
+        $order = Order::create([
+            "user_id" => (Auth::id()) ? Auth::id() : '',
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'province' =>$request->province,
+            'city' => $request->city,
+            'block' => $request->block,
+            'street' => $request->street,
+            'place-extra' =>  $request->place_extra,
+            'payment_method' => $request->payment_method,
+            "billling_name_on_card" => $request->holder,
+            'billling_subtotal' => $this->getNumbers()->get('newSubtotal'),
+            'billling_tax'=> $this->getNumbers()->get('tax'),
+            'billling_total'=> $this->getNumbers()->get('newTotal'),
+            'billling_discount'=> $this->getNumbers()->get('discount'),
+            'shipped'=>  false,
+
+        ]); 
+
+
+
+        foreach(Cart::content() as $item){
+            OrderProduct::create([
+                "product_id" =>  $item->id,
+                "order_id" => $order->id,
+                "quantity" => $item->qty,
+            ]);  
+        }
+
+        
+        
+        if($request->payment_method == "1"){
+            return View("checkout.purchase")->with(["order" => $order, "items" =>  $contents]);
+        }
+        
+        Cart::destroy();
+         
+        session()->remove("coupon");
 
         return View("checkout.payment");
     }
@@ -43,6 +114,16 @@ class CheckoutController extends Controller
         dd($request);
         return View("checkout.gateway");
     }
+    
+    public function purchase(Request $request){
+        dd($request);
+                
+        Cart::destroy();
+         
+        session()->remove("coupon");
+        return View("checkout.gateway");
+    }
+
 
     public function confirm(Request $request){
         dd($request);

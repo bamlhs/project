@@ -14,14 +14,29 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->bigIncrements('id');
-
-            $table->decimal('price',9,3);
-            $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');        
-            $table->timestamps();
-            
-        });
+                 $table->bigIncrements('id');
+                $table->string("name");
+                 $table->string("phone");
+                $table->string("block");
+                $table->string("city");
+                $table->string("province");
+                $table->string("street");
+                $table->string("place-extra")->nullable();
+                $table->boolean('payment_method');
+                $table->string("billling_name_on_card")->nullable();
+    
+                $table->string("billling_discount_code")->nullable();
+                $table->integer('billling_subtotal')->nullable();
+                $table->integer('billling_tax')->nullable();
+    
+                $table->integer('billling_total')->nullable();
+                $table->integer('billling_discount')->nullable();
+                $table->boolean('shipped');
+                $table->bigInteger('user_id')->unsigned()->nullable();
+                $table->foreign('user_id')->references('id')->on('users');        
+                $table->timestamps();
+    
+            });
     }
 
     /**

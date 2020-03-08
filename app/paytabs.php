@@ -5,7 +5,7 @@ namespace App;
     define("PAYPAGE_URL", "https://www.paytabs.com/apiv2/create_pay_page");
     define("VERIFY_URL", "https://www.paytabs.com/apiv2/verify_payment");
 
-class paytabs {
+class Paytabs {
 	
 
     private $merchant_email;

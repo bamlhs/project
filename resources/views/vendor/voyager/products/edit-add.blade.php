@@ -95,11 +95,11 @@
                                 </div>
                             @endforeach
 
-                            <div class="form-group col-md-12">
-
+                            {{-- <div class="form-group col-md-12"> --}}
+{{-- 
                             <h5>Product Variation <button>Add New</button></h5>
-                                   <div class="d-flex" style="display: flex">
-                                    <div>
+                                   <div class="d-flex" style="display: flex"> --}}
+                                    {{-- <div>
                                             <label for="title" class="control-label">Title</label>
                                          
 
@@ -112,24 +112,25 @@
                                             @endforeach
                                             </select>
 
-                                          </div>
+                                          </div> --}}
 
-                                          <div>
+                                          {{-- <div>
                                             <label for="price" class="control-label">Price</label>
                                             <input type="number" step="0.5" class="form-control"
                                             placeholder="price" 
                                             name="price" id="price">
-                                          </div>
+                                          </div> --}}
                                  
-                                          </div>
+                                          {{-- </div>
 
-                                           </div>
+                                           </div> --}}
 
 
 
                             
 
-                        </div><!-- panel-body -->
+                      
+                                        {{-- </div><!-- panel-body --> --}}
 
                         <div class="panel-footer">
                             @section('submit-buttons')

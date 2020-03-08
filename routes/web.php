@@ -1,5 +1,5 @@
 <?php
-
+ 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,17 +48,59 @@ Route::patch('/cart-qty/{id}', "CartController@changeQuantity")->name("qty");
 Route::post('/addtocart', "CartController@add")->name("addtocart");
 Route::get('/checkout', "CheckoutController@index")->name("checkout");
 Route::post('/payment', "CheckoutController@payment")->name("payment");
+Route::post('/purchase', "CheckoutController@purchase")->name("purchase");
 Route::post('/gateway', "CheckoutController@gateway")->name("gateway");
 Route::get('/confirm', "CheckoutController@confirm")->name("confirm");
 
 Route::post('/add_coupon', "CouponController@store")->name("add_coupon");
 
 Route::get('/profile', "UserController@index")->name("profile");
+Route::get('/orders', "UserController@orders")->name("orders");
 Route::post('/save-profile', "UserController@store")->name("sprofile");
 
 Route::get('/product/{id}', "ShopController@product")->name("single");
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
-}); 
+});
+
+
+
+Route::get('/paytabs_payment', function () {
+    $pt = Paytabs::getInstance("amiranis2012@gmail.com", "gMa3YRRsruaesOmWkBKRwB696vasLx12kb5i3WKurVIUK4Q4GBWcc2mixwLj4MloYrH2oswPneJ8jAcZb8cnayGI5s29enxdOffc");
+	$result = $pt->create_pay_page(array(
+		"merchant_email" => "amiranis2012@gmail.com",
+		'secret_key' => "gMa3YRRsruaesOmWkBKRwB696vasLx12kb5i3WKurVIUK4Q4GBWcc2mixwLj4MloYrH2oswPneJ8jAcZb8cnayGI5s29enxdOffc",
+		'title' => "John Doe",
+		'cc_first_name' => "John",
+		'cc_last_name' => "Doe",
+		'email' => "customer@email.com",
+		'cc_phone_number' => "973",
+		'phone_number' => "33333333",
+		'billing_address' => "Juffair, Manama, Bahrain",
+		'city' => "Manama",
+		'state' => "Capital",
+		'postal_code' => "97300",
+		'country' => "BHR",
+		'address_shipping' => "Juffair, Manama, Bahrain",
+		'city_shipping' => "Manama",
+		'state_shipping' => "Capital",
+		'postal_code_shipping' => "97300",
+		'country_shipping' => "BHR",
+		"products_per_title"=> "Mobile Phone",
+		'currency' => "BHD",
+		"unit_price"=> "10",
+		'quantity' => "1",
+		'other_charges' => "0",
+		'amount' => "10.00",
+		'discount'=>"0",
+		"msg_lang" => "english",
+		"reference_no" => "1231231",
+		"site_url" => "https://your-site.com",
+		'return_url' => "https://www.mystore.com/paytabs_api/result.php",
+		"cms_with_version" => "API USING PHP",
+    ));
+});
