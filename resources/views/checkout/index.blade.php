@@ -98,31 +98,29 @@
                             <?php
 
                             $merchant_email = "amiranis2012@gmail.com";
-                            $mechant_key = "gMa3YRRsruaesOmWkBKRwB696vasLx12kb5i3WKurVIUK4Q4GBWcc2mixwLj4MloYrH2oswPneJ8jAcZb8cnayGI5s29enxdOffc";
+                            $merchant_key = "gMa3YRRsruaesOmWkBKRwB696vasLx12kb5i3WKurVIUK4Q4GBWcc2mixwLj4MloYrH2oswPneJ8jAcZb8cnayGI5s29enxdOffc";
                            
-                            $paytabs = new paytabs($merchant_email,$mechant_key);
- 
+                        //    $paytabs = new paytabs();
+                           
                             $paytabs->create_pay_page(
                                 array(
                                     "merchant_email" => $merchant_email,
-                                    "secret_key" => $mechant_key,
+                                    "secret_key" => $merchant_key,
                                     "site_url" => "http://127.0.0.1:8000",
                                     "return_url" => "http://127.0.0.1:8000/gateway",
                                     "title" => "JohnDoe And Co.",
-                                    "cc_phone_number" => "00973",
-                                    "phone_number" => "123123123456",
+                                    "SERVER_ADDR" => "http://127.0.0.1:8000",
+                                    "cc_phone_number" => "00966",
+                                    "phone_number" => "",
                                     "email" => "johndoe@example.com",
-                                    "ip_customer" => {{ $_SERVER['REMOTE_ADDR'] }},
-                                    "ip_merchant" =>  {{ $_SERVER['SERVER_ADDR'] }},
                                     "products_per_title" => "MobilePhone || Charger || Camera",
                                     "unit_price" => "12.123 || 21.345 || 35.678 ",
                                     "quantity" => "2 || 3 || 1",
                                     "other_charges" => "12.123",
-                                    "amount" => "{{ $newTotal }}"
-                                    "discount" => "{{$discount }}",
+                                    "amount" => "{{ $newTotal }}",
+                                    "discount" => "{{ $discount }}",
                                     "currency" => "SAR",
                                     "reference_no" => "ABC-123",
-                                    'SERVER_ADDR' => 'localhost',
                                     "city" => "Riyadh",
                                     "state" => "Riyadh",
                                     "state_shipping" => "Riyadh",

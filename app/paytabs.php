@@ -5,15 +5,15 @@ namespace App;
     define("PAYPAGE_URL", "https://www.paytabs.com/apiv2/create_pay_page");
     define("VERIFY_URL", "https://www.paytabs.com/apiv2/verify_payment");
 
-class Paytabs {
+class paytabs {
 	
 
     private $merchant_email;
     private $secret_key;
 
-    function __construct($merchant_email, $secret_key) {
-        $this->merchant_email = $merchant_email;
-        $this->secret_key = $secret_key;
+    function __construct($merchant_email,$secret_key) {
+        $this->merchant_email = 'amiranis2012@gmail.com';
+        $this->secret_key = 'gMa3YRRsruaesOmWkBKRwB696vasLx12kb5i3WKurVIUK4Q4GBWcc2mixwLj4MloYrH2oswPneJ8jAcZb8cnayGI5s29enxdOffc';
     }
     
     function authentication(){
@@ -28,8 +28,11 @@ class Paytabs {
     function create_pay_page($values) {
         $values['merchant_email'] = $this->merchant_email;
         $values['secret_key'] = $this->secret_key;
+        // dd($values['secret_key']);
         $values['ip_customer'] = $_SERVER['REMOTE_ADDR'];
-        $values['ip_merchant'] = $_SERVER['SERVER_ADDR'];
+        // dd($values['ip_customer']); //127.0. 0.1
+          $values['ip_merchant'] =  "192.0.0.2";
+        // dd($values['ip_merchant']);
         return json_decode($this->runPost(PAYPAGE_URL, $values));
     }
     
@@ -39,6 +42,7 @@ class Paytabs {
         $values['merchant_email'] = $this->merchant_email;
         $values['secret_key'] = $this->secret_key;
         $values['payment_reference'] = $payment_reference;
+        
         return json_decode($this->runPost(VERIFY_URL, $values));
     }
     

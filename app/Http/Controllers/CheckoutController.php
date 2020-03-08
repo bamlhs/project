@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\Profile;
+use App\Paytabs;
 use App\OrderProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Validator;
 class CheckoutController extends Controller
 {
     public function index(){
+       
+        $merchant_email = "amiranis2012@gmail.com";
+        $merchant_key = "gMa3YRRsruaesOmWkBKRwB696vasLx12kb5i3WKurVIUK4Q4GBWcc2mixwLj4MloYrH2oswPneJ8jAcZb8cnayGI5s29enxdOffc";
        
         $profile =  (Auth::user()) ? Profile::where("user_id", Auth::id())->first() : '';
  
@@ -29,7 +33,10 @@ class CheckoutController extends Controller
             'newTotal' => $this->getNumbers()->get('newTotal'),
             "shipping" => $this->getNumbers()->get("shipping"),
             "profile" => $profile,
-            "paytabs" =>  App::make('App\paytabs'),
+            "paytabs" =>  App::make('App\paytabs',[
+                "merchant_email" => $merchant_email,
+                "secret_key" => $merchant_key,
+            ]),
         ]);
     }
  
@@ -45,13 +52,6 @@ class CheckoutController extends Controller
 
 
     public function payment(Request $request){
-
-    //     $contents = Cart::content()->map(function($item){
-    //         return $item->model->name .', '. $item->qty;
-    //     });
-    //    // dd($contents);
-     
-     // dd( $request->place_extra);
         
      $contents = Cart::content()->map(function($item){
                  return $item->model->name .', '. $item->qty .'.';
@@ -69,7 +69,7 @@ class CheckoutController extends Controller
     ])->validate();
 
         $order = Order::create([
-            "user_id" => (Auth::id()) ? Auth::id() : '',
+            "user_id" => (Auth::id()) ? Auth::id() : null,
             'name' => $request->name,
             'phone' => $request->phone,
             'province' =>$request->province,
@@ -107,7 +107,7 @@ class CheckoutController extends Controller
          
         session()->remove("coupon");
 
-        return View("checkout.payment");
+        return View("checkout.gateway");
     }
 
     public function gateway(Request $request){
