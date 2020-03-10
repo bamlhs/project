@@ -16,8 +16,14 @@ Route::get('locale/{locale}', function ($locale){
     return redirect()->back();
 });
 
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
+
+
 Route::get('/', "HomeController@index")->name("/");
 // Authentication Routes...
+
 Route::post('/login', 'Auth\LoginController@login')->name('login');
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::post('/register', 'Auth\RegisterController@register')->name('register');
@@ -63,9 +69,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
 
 
  

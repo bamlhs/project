@@ -30,10 +30,11 @@
                     </div>
 
                     <div class="details-cart">
-                        <div class="form-check form-check-inline check-all">
-                            <input class="form-check-input" type="checkbox" id="check-all" value="check-all">
-                            <label class="form-check-label" for="check-all">تحديد جميع المنتجات</label>
-                        </div>
+                         
+                        @if (Cart::count() == 0)
+                          <p>your cart is empty</p>
+                        @endif
+
 
                         <div class="products-cart-details">
 
@@ -94,10 +95,7 @@
                             <div class="lable-desc">الإجمالي المبدئي:</div>
                             <div class="fld-desc">{{ Cart::Total() }} ر.س</div>
                         </div>
-                        <div class="item-desc-order">
-                            <div class="lable-desc">سعر التوصيل:</div>
-                            <div class="fld-desc">{{ Cart::Tax() }} ر.س</div>
-                        </div>
+                       
 
                     </div>
                     <div class="total-price-order">

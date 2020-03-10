@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Validator;
@@ -55,12 +56,12 @@ class UserController extends Controller
 
     public function orders(){
 
-        $orders = DB::table('orders')->where('user_id', Auth::id())
+        $products = DB::table('orders')->where('user_id', Auth::id())
         ->join('orders_products', 'orders.id', '=', 'orders_products.order_id')
         ->join('products', 'orders_products.product_id', '=', 'products.id')
-        ->select('orders.id', 'products.*', 'orders_products.quantity')
+        ->select('orders.id as orderID', 'products.*', 'orders_products.quantity')
         ->get();
 
-        return View("profile", ["profile" => $profile]);
+       return View("orders", ["products" => $products]);
     }
 }

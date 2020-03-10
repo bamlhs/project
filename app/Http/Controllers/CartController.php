@@ -22,7 +22,8 @@ class CartController extends Controller
     }
 
     public function changeQuantity(Request $request, $id){
-        Cart::update($id,["quantity" => $request->quantity]);
+        
+        Cart::update($id,["qty" => $request->quantity]);
         return response()->json(['success',  true]);
     }
 

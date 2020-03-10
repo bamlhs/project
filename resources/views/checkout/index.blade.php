@@ -15,6 +15,15 @@
     <form action="{{ route('payment') }}" method="POST">
         @csrf
         <div class="row container-confirm-form">
+            @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
             <div class="col-md-9 right-details  confirm-right confirm-form">
                 <!-- Prosnal data Block -->
                 <div class="block-form">
@@ -80,95 +89,7 @@
                     </div>
                 </div>
 
-                <!-- visa data Block -->
-                <div class="block-form">
-                    <h4>تفاصيل البطاقة</h4>
-                    <div class="data-block-form">
-                        <div class="form-row">
-                            <div class="col">
-                                <input type="text" name="holder" class="form-control" placeholder="إسم حامل البطاقة">
-                            </div>
-                            {{-- <div class="col">
-                                <input type="text" class="form-control" placeholder="رقم البطاقة">
-                            </div> --}}
-                        </div>
-
-                        <div class="form-row">
-                                            
-                            <?php
-
-                            $merchant_email = "amiranis2012@gmail.com";
-                            $merchant_key = "gMa3YRRsruaesOmWkBKRwB696vasLx12kb5i3WKurVIUK4Q4GBWcc2mixwLj4MloYrH2oswPneJ8jAcZb8cnayGI5s29enxdOffc";
-                           
-                        //    $paytabs = new paytabs();
-                           
-                            $paytabs->create_pay_page(
-                                array(
-                                    "merchant_email" => $merchant_email,
-                                    "secret_key" => $merchant_key,
-                                    "site_url" => "http://127.0.0.1:8000",
-                                    "return_url" => "http://127.0.0.1:8000/gateway",
-                                    "title" => "JohnDoe And Co.",
-                                    "SERVER_ADDR" => "http://127.0.0.1:8000",
-                                    "cc_phone_number" => "00966",
-                                    "phone_number" => "",
-                                    "email" => "johndoe@example.com",
-                                    "products_per_title" => "MobilePhone || Charger || Camera",
-                                    "unit_price" => "12.123 || 21.345 || 35.678 ",
-                                    "quantity" => "2 || 3 || 1",
-                                    "other_charges" => "12.123",
-                                    "amount" => "{{ $newTotal }}",
-                                    "discount" => "{{ $discount }}",
-                                    "currency" => "SAR",
-                                    "reference_no" => "ABC-123",
-                                    "city" => "Riyadh",
-                                    "state" => "Riyadh",
-                                    "state_shipping" => "Riyadh",
-                                    "city_shipping" => "Riyadh",
-                                    "postal_code" => "12345",
-                                    "country" => "SA",
-                                    "shipping_first_name" => "John",
-                                    "cc_first_name" => "John",
-                                    "cc_last_name" => "Doe",
-                                    "shipping_last_name" => "Doe",
-                                    "postal_code_shipping" => "1234",
-                                    "country_shipping" => "BHR",
-                                    "msg_lang" => "English",
-                                    )); 
-                          
-                          
-                                    ?>
-
-                        {{-- <div class="form-row">
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="السنه">
-                            </div>
-                            <div class="col">
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option selected>الشهر</option>
-                                    <option>1 شهر</option>
-                                    <option>2 شهر</option>
-                                    <option>3 شهر</option>
-                                    <option>4 شهر</option>
-                                    <option>5 شهر</option>
-                                </select>
-                            </div>
-                        </div> --}}
-{{-- 
-                        <div class="form-row">
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="رقم الأمان">
-                            </div>
-                            <div class="col">
-                            </div>
-                        </div> --}}
-
-                    </div>
-                </div>
-
-             
-
-            </div>
+        
    <!-- details-order-blocks -->
    <div class="details-order-blocks">
     <div class="order-blocks">
