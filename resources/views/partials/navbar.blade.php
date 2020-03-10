@@ -22,7 +22,7 @@
                                     <li>
                                         <a href="#"><img src="assets/images/icon_phone.svg" /> App </a>
                                     </li>
-                                    <li><img src="assets/images/support.svg" />920006848</li>
+                                    <li><img src="{{ asset("assets/images/support.svg") }}" />920006848</li>
                                     @if(app()->getLocale() === "ar")
                                     <li><a href="{{ url('locale/en') }}" ><i class="fa fa-language"></i> EN</a></li>
                                     @else
@@ -34,7 +34,7 @@
                             <!-- header login -->
                             <div class="header-login">
                                 <ul>
-                                    <li><img src="assets/images/support.svg" />920006848</li>
+                                    <li><img src="{{ asset("assets/images/support.svg") }}" />920006848</li>
 
                                     @if(app()->getLocale() === "ar")
                                     <li><a href="{{ url('locale/en') }}" ><i class="fa fa-language"></i> EN</a></li>
@@ -43,7 +43,7 @@
                                     @endif
                                     <li>
                                         <a href="{{ route('cart') }}" class="icon-cart">
-                                            <img src="assets/images/cart.svg" />
+                                            <img src="{{ asset("assets/images/cart.svg") }}" />
                                             <span class="number-item-cart">{{ Cart::Count() }}</span>
                                         </a>
                                     </li>
@@ -100,7 +100,7 @@
                                         <li><a href="#">{{ __("text.Hotels") }}</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="">{{ __("text.HouseService") }}</a></li>
+                            <li><a href="{{ route("homeService") }}">{{ __("text.HouseService") }}</a></li>
                                 <li><a href="#" data-toggle="modal" data-target="#contactUsModal">{{ __("text.Contact") }}</a></li>
                             </ul>
                         </div>

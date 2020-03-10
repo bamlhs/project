@@ -7,23 +7,25 @@
     <!--  Main web  -->
     <div class="container">
         <div class="breadcrumb">
-            <a href="#">المتجر</a>
-            <a href="#">سلة التسوق</a>
-            <span>تأكيد الطلب</span>
+            <a href="#">{{ __("text.Store") }}</a>
+            <a href="#">{{ __("text.cart") }} </a>
+            <span>{{ __("text.confirm_order") }}</span>
 
         </div>
+
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="{{ route('payment') }}" method="POST">
         @csrf
         <div class="row container-confirm-form">
-            @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+
             <div class="col-md-9 right-details  confirm-right confirm-form">
                 <!-- Prosnal data Block -->
                 <div class="block-form">
@@ -31,7 +33,7 @@
                     <div class="data-block-form">
                         <div class="form-row">
                             <div class="col">
-                                <input type="text" name="name" class="form-control" placeholder="الإسم" value="{{(Auth::user() && $profile) ? $profile->name : ''}}">
+                                <input type="text" name="name" class="form-control" placeholder="الإسم" value="{{ old('name') or (Auth::user() && $profile) ? $profile->name : '' }}">
                             </div>
                             <div class="col">
                                 <input type="text" name="phone" class="form-control" placeholder="رقم الجوال"  value="{{(Auth::user() && $profile) ? $profile->phone : ''}}">
@@ -45,7 +47,7 @@
                     <div class="data-block-form">
                         <div class="form-row">
                             <div class="col">
-                                <input type="text" name="province" class="form-control" placeholder="المنطقة"  value="{{(Auth::user() && $profile)? $profile->province : ''}}">
+                                <input type="text" name="province" class="form-control" placeholder="المنطقة"  value="{{  old('province') or(Auth::user() && $profile)? $profile->province : ''}}">
 
                             </div>
                             <div class="col">
@@ -128,7 +130,7 @@
    <!-- Left Cart -->
    <div class="col-md-3 left-details cart-left  confirm-left">
     <div class="details-products-block-left  left-cart-block left-confirm-block  block-coupon">
-        <h6>لديك كوبون؟</h6>
+        <h6>{{ __("text.have_coupon") }}</h6>
         <form method="post" action="{{ route('add_coupon') }}">
             @csrf
             <div class="form-group">
@@ -161,27 +163,27 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-3 items-service-shop wow zoomIn animated " data-wow-delay="0.2s">
-                    <img src="assets/images/connecting-icon.svg" />
-                    <h3>إستلم من أي فرع</h3>
-                    <p>أو توصيل مجاني عند الطلب بمبلغ أكثر من ٢٠٠ ريال</p>
+                    <img src="{{ asset("assets/images/connecting-icon.svg") }}" />
+                <h3>{{ __("text.get_branch") }}</h3>
+                    <p>{{ __("text.free_shipping") }}</p>
                 </div>
 
                 <div class="col-md-3 items-service-shop wow zoomIn animated " data-wow-delay="0.4s">
-                    <img src="assets/images/return.svg" />
-                    <h3>إرجاع مجاني</h3>
-                    <p>سياسة إرجاع في حال لم يعجبك المنتج</p>
+                    <img src="{{ asset("assets/images/return.svg") }}" />
+                    <h3>{{ __("text.refund") }}</h3>
+                    <p>{{ __("text.refund_policy") }}</p>
                 </div>
 
                 <div class="col-md-3 items-service-shop wow zoomIn animated " data-wow-delay="0.6s">
-                    <img src="assets/images/security-icon.svg" />
-                    <h3>دفع مباشر آمن</h3>
-                    <p>نقبل جميع البطاقات الإتمانيه أو بطاقات مدى</p>
+                    <img src="{{ asset("assets/images/security-icon.svg") }}" />
+                <h3>{{ __("text.secure-payment") }}</h3>
+                <p>{{ __("text.accepted-cards") }}</p>
                 </div>
 
                 <div class="col-md-3 items-service-shop wow zoomIn animated " data-wow-delay="0.8s">
-                    <img src="assets/images/client-service.svg" />
-                    <h3>مركز خدمة العملاء</h3>
-                    <p>متواجدين على مدار الساعه</p>
+                    <img src="{{ asset("assets/images/client-service.svg") }}" />
+                    <h3>{{ __("text.customer-service") }}</h3>
+                    <p>{{ __("text.available-247") }}</p>
                 </div>
             </div>
         </div>

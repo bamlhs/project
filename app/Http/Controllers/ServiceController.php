@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\HomeService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class ServiceController extends Controller
 {
@@ -38,7 +42,7 @@ class ServiceController extends Controller
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
-                'phone' => 'required',
+                'phone' => 'required|phone:sa',
                 'address' => 'required',
             ]);
             if ($validator->fails()) {

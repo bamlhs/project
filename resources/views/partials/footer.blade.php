@@ -1,5 +1,4 @@
-<?php
-/*
+
 
    <!-- Footer  -->
    <footer>
@@ -68,7 +67,3 @@
     <div class="copy-right">{{ __("text.reserved") }}</div>
     </div>
 </footer>
-
-
-*/
-?>

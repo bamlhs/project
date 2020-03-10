@@ -8,8 +8,14 @@
         <!--  Main web  -->
         <div class="container">
             <div class="breadcrumb">
-                <a href="#">المتجر</a>
-                <span>الصوابين الأوتوماتيك</span>
+                <a href="#">{{ __("text.Store") }}</a>
+                <span>
+                     @if (app()->getLocale() == "en")
+                    {{ $product->name }}
+                    @else
+                    {{ $product->name_ar }}
+                    @endif
+                 </span>
 
             </div>
 
@@ -18,7 +24,14 @@
                     <!-- slider-producst-details block -->
                     <div class="details-products-block">
                         <div class="title-products">
-                            <h4>{{ $product->name }}</h4>
+                            <h4>
+                                @if (app()->getLocale() == "en")
+                                {{ $product->name }}
+                                @else
+                                {{ $product->name_ar }}
+                                @endif
+                            </h4>
+                            
                             <a herf="#" data-toggle="modal" data-target="#shearModal">
                                 <i class="fas fa-share-alt"></i>
                             </a>
@@ -41,8 +54,12 @@
 
 
                     <div class="details-products-block block-details">
-                        <h2>وصف المنتج:</h2>
+                        <h2>{{ __("text.product_desc") }}</h2>
+                        @if (app()->getLocale() == "en")
                         {!! $product->description !!}
+                        @else
+                        {!! $product->description_ar !!}
+                        @endif
                         
 
                     </div>
@@ -74,7 +91,7 @@
                                 @csrf
                                 <img src="{{ asset('assets/images/add-cart.svg') }}" />
                             <input type="hidden" name="id" id="id" value="{{ $product->id }}">
-                                <button type="submit">أضف للعربة</button>
+                                <button type="submit">{{ __("text.addtocart") }}</button>
 </form>
                         </div>
 
@@ -86,35 +103,38 @@
         </div>
 
     </div>
+
     <!-- service shop block -->
     <div class="service-shop-block service-footer-shop">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-3 items-service-shop wow zoomIn animated " data-wow-delay="0.2s">
-                    <img src="assets/images/connecting-icon.svg" />
-                    <h3>إستلم من أي فرع</h3>
-                    <p>أو توصيل مجاني عند الطلب بمبلغ أكثر من ٢٠٠ ريال</p>
+                    <img src="{{ asset("assets/images/connecting-icon.svg") }}" />
+                <h3>{{ __("text.get_branch") }}</h3>
+                    <p>{{ __("text.free_shipping") }}</p>
                 </div>
 
                 <div class="col-md-3 items-service-shop wow zoomIn animated " data-wow-delay="0.4s">
-                    <img src="assets/images/return.svg" />
-                    <h3>إرجاع مجاني</h3>
-                    <p>سياسة إرجاع في حال لم يعجبك المنتج</p>
+                    <img src="{{ asset("assets/images/return.svg") }}" />
+                    <h3>{{ __("text.refund") }}</h3>
+                    <p>{{ __("text.refund_policy") }}</p>
                 </div>
 
                 <div class="col-md-3 items-service-shop wow zoomIn animated " data-wow-delay="0.6s">
-                    <img src="assets/images/security-icon.svg" />
-                    <h3>دفع مباشر آمن</h3>
-                    <p>نقبل جميع البطاقات الإتمانيه أو بطاقات مدى</p>
+                    <img src="{{ asset("assets/images/security-icon.svg") }}" />
+                <h3>{{ __("text.secure-payment") }}</h3>
+                <p>{{ __("text.accepted-cards") }}</p>
                 </div>
 
                 <div class="col-md-3 items-service-shop wow zoomIn animated " data-wow-delay="0.8s">
-                    <img src="assets/images/client-service.svg" />
-                    <h3>مركز خدمة العملاء</h3>
-                    <p>متواجدين على مدار الساعه</p>
+                    <img src="{{ asset("assets/images/client-service.svg") }}" />
+                    <h3>{{ __("text.customer-service") }}</h3>
+                    <p>{{ __("text.available-247") }}</p>
                 </div>
             </div>
         </div>
     </div>
+    <!-- End service shop block -->
 
+ 
 @endsection

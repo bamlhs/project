@@ -174,11 +174,21 @@
             <p>
             {{  __("text.our-pride") }}
             </p>
-            <form class="form-booking-home"  method="post" action="{{ action('ServiceController@StoreHome') }}">
+            
+            <form class="form-booking-home"  method="post" action="{{ route("StoreHome") }}">
+                @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
                 <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-            <input type="text" lass="form-control" placeholder="{{ __('text.Name')}}"  name="name" id="name">
-                <input type="text" name="phone" id="phone" class="form-control" placeholder="{{ __('text.phone')}}">
-                <input type="text" class="form-control" placeholder="{{ __('text.address') }}"  name="address" id="address">
+            <input type="text" lass="form-control" placeholder="{{ __('text.Name')}}"  name="name" id="name" value="{{ old("name") }}">
+                <input type="text" name="phone" id="phone" class="form-control" placeholder="{{ __('text.phone')}}" value="{{ old("phone") }}">
+                <input type="text" class="form-control" placeholder="{{ __('text.address') }}"  name="address" id="address" value="{{ old("address") }}">
             <button type="submit" class="btn btn-primary" >{{ __("text.Reserve-Now") }}</button>
             </form>
         </div>

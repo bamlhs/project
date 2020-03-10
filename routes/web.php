@@ -37,7 +37,7 @@ Route::get('/feature', 'MainController@feature')->name('feature');
 
 Route::get('/service', 'ServiceController@laundries')->name('laundry');
 Route::get('/service/hotels', 'ServiceController@hotels')->name('hotels');
-Route::get('/service/home', 'ServiceController@home')->name('home');
+Route::get('/service/home', 'ServiceController@home')->name('homeService');
 Route::get('/service/tools', 'ServiceController@tools')->name('tools');
 Route::get('/service/home/book', 'ServiceController@book')->name('book');
 Route::post('/service/home/Store', 'ServiceController@StoreHome')->name('StoreHome');
