@@ -192,12 +192,35 @@ $(document).ready(function () {
     });
 
     // check box size
-    jQuery(":checkbox").change(function () {
-        jQuery(this).parent('#size--wrapper .js-form-type-checkbox').toggleClass('service-selected');
+    // jQuery(":checkbox").change(function () {
+    //     jQuery(this).parent('.js-form-type-checkbox').toggleClass('service-selected');
+    // });
+
+
+    $("#size--wrapper .js-form-type-checkbox").on("click", function(e){
+        e.preventDefault();
+        // $(this).parent('.js-form-type-checkbox').removeClass('service-selected');
+        $(this).addClass("service-selected").siblings().removeClass("service-selected");
+    });
+
+    $(".js-form-type-checkbox").on("click", function(e){
+        e.preventDefault();
+        if($(this).attr("data-discount") == $(this).attr("data-price")){
+            $(".price-before").addClass("hide");
+           
+        }else{
+            $('.price-before .price').text($(this).attr("data-price"));
+            $(".price-before").removeClass("hide");
+        }
+        $(".form-cart").find("#id").val($(this).attr("data-id"));
+        $('.price-now-left .price').text($(this).attr("data-discount"));
     });
 
 });
 
+
+
+ 
 
 // --> Check https://codepen.io/bramus/pen/vKpjNP
 jQuery(function ($) {

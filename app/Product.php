@@ -3,12 +3,19 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
 
+    use SoftDeletes;
+    
     public function productOptions(){
         return $this->hasMany("App\ProductOption");
+    }
+
+    public function productvariations(){
+        return $this->hasMany("App\ProductVariation");
     }
 
 

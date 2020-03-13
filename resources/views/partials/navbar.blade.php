@@ -7,10 +7,10 @@
                     <div class="col-md-6">
                         <div class="top-menu">
                             <ul>
-                            <li><a href="{{ route("laundry") }}">Laundry</a></li>
-                                <li><a href="{{ route('tools')}}">Tools</a></li>
-                                <li><a href="{{ route('hotels')}}">Hotel Services</a></li>
-                                <li><a href="{{ route('shop')}}">Store</a></li>
+                            <li><a href="{{ route("laundry") }}">{{__("text.Laundries")}}</a></li>
+                                <li><a href="{{ route('tools')}}">{{__("text.equipments")}}</a></li>
+                                <li><a href="{{ route('hotels')}}">{{__("text.Hotels")}}</a></li>
+                                <li><a href="{{ route('shop')}}">{{__("text.Store")}}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -49,10 +49,10 @@
                                     </li>
                                     <li class="users-header">
                                    @guest
-                                    <img class="icon-user" src="assets/images/icon-user.svg" />
-                                    <a href="#" data-toggle="modal" data-target="#loginModal">Register </a>
+                                    <img class="icon-user" src="{{ asset('assets/images/icon-user.svg') }}" />
+                                    <a href="#" data-toggle="modal" data-target="#loginModal">{{ __("text.Register") }} </a>
                                     <span>/</span>
-                                    <a href="#" data-toggle="modal" data-target="#loginModal">Log in</a>
+                                    <a href="#" data-toggle="modal" data-target="#loginModal">{{ __("text.Signin") }}</a>
                                
                                 @else
 
@@ -96,11 +96,14 @@
                                                 <li><a href="">{{ __("text.Hotels") }}</a></li>
                                             </ul>
                                         </li> -->
-                                        <li><a href="#">{{ __("text.Tools") }}</a></li>
-                                        <li><a href="#">{{ __("text.Hotels") }}</a></li>
+                                        <li><a href="{{ route("tools") }}">{{ __("text.equipments") }}</a></li>
+                                        <li><a href="{{ route("hotels") }}">{{ __("text.Hotels") }}</a></li>
                                     </ul>
                                 </li>
-                            <li><a href="{{ route("homeService") }}">{{ __("text.HouseService") }}</a></li>
+                                <li><a href="{{ route("homeService") }}">{{ __("text.HouseService") }}</a></li>
+                                <li><a href="{{ route('before') }}">{{ __("text.beforeandafter") }}</a></li>
+                                <li><a href="{{ route('gallery') }}">{{ __("text.gallery") }}</a></li>
+
                                 <li><a href="#" data-toggle="modal" data-target="#contactUsModal">{{ __("text.Contact") }}</a></li>
                             </ul>
                         </div>

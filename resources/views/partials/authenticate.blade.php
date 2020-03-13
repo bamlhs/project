@@ -11,7 +11,7 @@
                             </button>
     
                             <div class="logo-login">
-                                <img src="assets/images/logo-v2.svg" />
+                                <img src="{{ asset("assets/images/logo-v2.svg") }}" />
                             </div>
     
                             <div class="data-login-block">
@@ -28,7 +28,7 @@
                                             <div class="form-group">
                                                 <input type="email" class="form-control  @error('email') is-invalid @enderror" placeholder="{{ __("text.Mail") }}" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-                                                @error('email')
+                                            @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -41,7 +41,7 @@
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
-                                            @enderror
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                     <div class="form-check">

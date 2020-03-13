@@ -49,9 +49,10 @@ class CheckoutController extends Controller
         $merchant_email ="amiranis2012@gmail.com";
         $merchant_key ="gMa3YRRsruaesOmWkBKRwB696vasLx12kb5i3WKurVIUK4Q4GBWcc2mixwLj4MloYrH2oswPneJ8jAcZb8cnayGI5s29enxdOffc";
       
+
         Validator::make($request->all(), [
         'name' => 'required|max:100',
-        'phone' => 'required|phone:sa',
+        'phone' => 'required|phone',
         'province' => 'required',   
         'city' => 'required',
         'block' => 'required',

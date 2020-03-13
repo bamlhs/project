@@ -24,7 +24,6 @@ class UserController extends Controller
     }
 
     public function store(Request $request){
-     
 
          Validator::make($request->all(), [
             'name' => 'required|max:100',
@@ -37,18 +36,23 @@ class UserController extends Controller
             'street' => 'required',
         ])->validate();
 
-        Profile::create([
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'gender' => $request->gender,
-            'birth-date' => $request->birthdate,
-            'province' =>$request->province,
-            'city' => $request->city,
-            'block' => $request->block,
-            'street' => $request->street,
-            'place_extra' =>  $request->place_extra,
-            'user_id' => Auth::id(),
-        ]);
+        
+        $flight = Profile::updateOrCreate(
+            ['id' => Auth::id()],
+            [
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'gender' => $request->gender,
+                'birth-date' => $request->birthdate,
+                'province' =>$request->province,
+                'city' => $request->city,
+                'block' => $request->block,
+                'street' => $request->street,
+                'place_extra' =>  $request->place_extra,
+                'user_id' => Auth::id(),
+            ]
+        ); 
+  
 
      return redirect()->route('profile');
         

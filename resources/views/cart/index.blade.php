@@ -14,11 +14,11 @@
         </div>
 
         <div class="row container-cart-massage">
-            <div class="col-md-9 ml-auto massage-note-cart">
+            {{-- <div class="col-md-9 ml-auto massage-note-cart">
                 <div class="note-cart">
                     الشحن المجاني للمشتريات فوق ٢٠٠ ريال. أضف المزيد من المشتريات بقيمة ٥٠ ريال للحصول على الشحن المجاني
                 </div>
-            </div>
+            </div> --}}
         </div>
 
         <div class="row container-cart-data">
@@ -26,9 +26,9 @@
                 <div class="details-products-block ">
                     <div class="header-cart">
                         <div class="title-cart"> {{ __("text.cart") }}</div>
-                        <div class="number-products">{{ Cart::count() }} {{ __("text.products") }}</div>
+                        <div class="number-products"><span class="counter">{{ Cart::count() }}</span> {{ __("text.products") }}</div>
                     </div>
-
+                    
                     <div class="details-cart">
                          
                         @if (Cart::count() == 0)
@@ -57,7 +57,7 @@
                  </div>
 
                 <div class="quantity-container quantity-block-number">
-                    <input type="text" class="quantity-amount number-quantity" name="" value="{{ $item->qty }}" 
+                    <input type="number" class="quantity-amount number-quantity" name="" value="{{ $item->qty }}" 
                     data-id="{{ $item->rowId }}" />
                     <div class=" btn-dec-inc ">
                         <button class="increase value-button btn-inc" type="button" title="Increase Quantity">+</button>
@@ -69,7 +69,7 @@
 
                 <div class="price-product-cart">{{ $item->price }} {{ __("text.sr") }}</div>
 
-                <button type="button" class="btn btn-link delete-product">
+                <button type="button" class="btn btn-link delete-product" data-id="{{ $item->rowId }}" >
                     <img src="assets/images/delete.svg" />
                 </button>
             </div>
@@ -93,19 +93,19 @@
                     <div class="desc-order-left">
                         <div class="item-desc-order">
                             <div class="lable-desc">{{ __("text.initial_total") }}</div>
-                            <div class="fld-desc">{{ Cart::Total() }} {{ __("text.sr") }}</div>
+                            <div class="fld-desc"><span class="fld-total">{{ Cart::Total() }}</span> {{ __("text.sr") }}</div>
                         </div>
                        
 
                     </div>
                     <div class="total-price-order">
                     <div class="lable-desc">{{ __("text.delivery_price") }}</div>
-                        <div class="fld-desc">{{ $shipping }}  {{ __("text.sr") }}</div>
+                        <div class="fld-desc"><span class="fld-shipping"><span class="ship">{{ $shipping }}</span></span>  {{ __("text.sr") }}</div>
                     </div>
                     <div class="btn-cart-order">
                         <form action="{{ route('checkout') }}">
                         <button type="submit">
-                            شراء ( <span>{{ Cart::count() }} {{ __("text.products")}}</span> )
+                            شراء ( <span><span class="counter">{{ Cart::count() }}</span> {{ __("text.products")}}</span> )
                          </a>
                     </div>
                 </form>
@@ -158,26 +158,65 @@
 @section('extra_scripts')
     
 
-    <script>
+    <script type="application/javascript">
+ 
+ jQuery(document).ready(function() { 
 
-        (function(){
-            const classname = document.querySelectorAll('.quantity-amount');
+$('.value-button').each(function() { 
+    $(this).on("click", function() {
+                let qty_amount = $(this).parent().parent().find(".quantity-amount");
 
-            Array.from(classname).forEach(function(element){
-                element.addEventListener('change', function(){
-                    const id = element.getAttribute("data-id");
-                    axios.patch(`/cart-qty/${id}`,{
-                        quantity: this.value
-                    })
-                    .then(function(response){
-                        window.location.href = '{{ route("cart") }}'
-                    })
-                    .catch(function(error){
-
-                    });
+                const id = qty_amount.data("id");
+                console.log(id);
+                if(qty_amount.val() < 1){
+                    qty_amount.val(1)
+                }
+                axios.patch(`/qty/${id}`,{
+                    quantity: qty_amount.val()
                 })
+                .then(function(response){
+                    console.log(response.data.total);
+                    $('.fld-total').text(response.data.total);
+                    $('.counter').text(response.data.counter);
+                    $('.ship').text(response.data.shipping);
+                    $(".number-item-cart").text(response.data.counter);
+                    // window.location.href = '{{ route("cart") }}'
+                })
+                .catch(function(error){
+                    console.log(error);
+                }); 
+                 
+            });
+});
+
+$('.delete-product').each(function() { 
+    $(this).on("click", function() {
+                var product_id = $(this).data("id");
+
+                axios.delete(`/product/delete/${product_id}`)
+                .then(function(response){
+                    console.log(response.data.total);
+                    $('.fld-total').text(response.data.total);
+                    $('.counter').text(response.data.counter);
+                    $('.ship').text(response.data.shipping);
+                    $(".number-item-cart").text(response.data.counter);
+                    // window.location.href = '{{ route("cart") }}'
+                    location.reload(true);
+                })
+                .catch(function(error){
+                    console.log(error);
+                });
+                 
+            });
+});
+
+            $(".quantity-amount").on('change keydown keypress keyup mousedown click mouseup', function(){
+                console.log('change');
+
             });
         });
+       
+ 
 
     </script>
 

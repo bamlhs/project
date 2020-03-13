@@ -29,14 +29,17 @@
             <div class="col-md-9 right-details  confirm-right confirm-form">
                 <!-- Prosnal data Block -->
                 <div class="block-form">
-                    <h4>البيانات الشخصية</h4>
+                    <h4>{{ __("text.personal_information") }} </h4>
                     <div class="data-block-form">
                         <div class="form-row">
                             <div class="col">
-                                <input type="text" name="name" class="form-control" placeholder="الإسم" value="{{ old('name') or (Auth::user() && $profile) ? $profile->name : '' }}">
+                                <input type="text" name="name" class="form-control"
+                                 placeholder="الإسم" value="{{ old('name', ((Auth::user() && $profile) ? $profile->name : ''))  }}">
+
+                                   
                             </div>
                             <div class="col">
-                                <input type="text" name="phone" class="form-control" placeholder="رقم الجوال"  value="{{(Auth::user() && $profile) ? $profile->phone : ''}}">
+                                <input type="text" name="phone" class="form-control" placeholder="رقم الجوال"  value="{{old('phone', ((Auth::user() && $profile) ? $profile->phone : ''))}}">
                             </div>
                         </div>
                     </div>
@@ -47,25 +50,28 @@
                     <div class="data-block-form">
                         <div class="form-row">
                             <div class="col">
-                                <input type="text" name="province" class="form-control" placeholder="المنطقة"  value="{{  old('province') or(Auth::user() && $profile)? $profile->province : ''}}">
+                                <input type="text" name="province" class="form-control" placeholder="المنطقة"  value="{{  old('province', ((Auth::user() && $profile)? $profile->province : '')) }}">
 
                             </div>
                             <div class="col">
-                                <input type="text" name="city" class="form-control" placeholder="المدينة"  value="{{(Auth::user() && $profile)? $profile->city : ''}}">
+                                <input type="text" name="city" class="form-control" placeholder="المدينة"  value="{{ old('city', ((Auth::user() && $profile)? $profile->city : ''))}}">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <input type="text" name="block" class="form-control" placeholder="الحي"  value="{{(Auth::user() && $profile)? $profile->block : ''}}">
+                                <input type="text" name="block" class="form-control" placeholder="الحي"  value="{{old('block', ((Auth::user() && $profile)? $profile->block : ''))}}">
                             </div>
                             <div class="col">
-                                <input type="text" name="street" class="form-control" placeholder="الشارع"  value="{{(Auth::user() && $profile)? $profile->street : ''}}">
+                                <input type="text" name="street" class="form-control" placeholder="الشارع"  value="{{old('street', ((Auth::user() && $profile)? $profile->street : ''))}}">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col">
-                                <textarea class="form-control" name="place_extra" id="exampleFormControlTextarea1" rows="3" placeholder="تفاصيل إضافية" value="{{(Auth::user() && $profile)? $profile->place_extra : '' }}"></textarea>
+                                <textarea class="form-control" name="place_extra" id="exampleFormControlTextarea1" rows="3" placeholder="{{ __("text.place_extra") }}">
+                                     {{ old('place_extra',
+                                      ((Auth::user() && $profile)? $profile->place_extra : '' )) }}
+                                </textarea>
                             </div>
                         </div>
                     </div>
@@ -78,11 +84,11 @@
 
                         <div class="form-row">
                             <div class="col">
-                                <input type="radio" id="payment1" value="0" name="payment_method" class="custom-control-input" checked>
+                                <input type="radio" id="payment1" value="0" name="payment_method" class="custom-control-input"   {{ old('payment_method') == "0" ? 'checked' : '' }} >
                                 <label class="custom-control-label" for="payment1">الدفع كاش عند الإستلام</label>
                             </div>
                             <div class="col">
-                                <input type="radio" id="payment2" value='1' name="payment_method" class="custom-control-input">
+                                <input type="radio" id="payment2" value='1' name="payment_method" class="custom-control-input" {{ old('payment_method') == "1" ? 'checked' : ''}}>
                                 <label class="custom-control-label" for="payment2">
                                     الدفع أونلاين عن طريق بطاقة فيزا أو مدى
                                 </label>
@@ -136,7 +142,7 @@
             <div class="form-group">
                 <input type="text" name="coupon_code" id="coupon_code" class="form-control" placeholder="الرجاء إدخال الكوبون">
             </div>
-            <button type="submit" class="btn btn-primary btn-link-confirm">تفعيل الكوبون</button>
+            <button type="submit" class="btn-link-confirm">تفعيل الكوبون</button>
         </form>
 
     </div>

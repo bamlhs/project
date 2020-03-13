@@ -37,7 +37,7 @@
                 <h2>{{ __("text.related-links") }}</h2>
                     <ul class="footer-menu">
                     <li><a href="{{ route('laundry') }}">{{ __("text.Laundries") }}</a></li>
-                        <li><a href="{{ route('tools') }}">{{ __("text.Tools") }}</a></li>
+                        <li><a href="{{ route('tools') }}">{{ __("text.equipments") }}</a></li>
                         <li><a href="{{ route('hotels') }}">{{ __("text.Hotels") }}</a></li>
                         <li><a href="{{ route('shop') }}">{{ __("text.Store") }}</a></li>
                         <li><a href="{{ route('home') }}">{{ __("text.HouseService") }}</a></li>
@@ -51,7 +51,7 @@
 {{ __("text.be-aware") }}                        </div>
                         <form>
                             <input type="email" class="form-control" placeholder="{{ __("text.emailOrphone") }}" />
-                            <button type="submit" class="btn btn-primary">{{ __("text.subscribe") }}</button>
+                            <button type="submit" class="btn-primary">{{ __("text.subscribe") }}</button>
                         </form>
                     </div>
                 </div>

@@ -26,7 +26,7 @@
             <div class="container">
                 <div class="bg-inner-page services-page">
                     <div class="header-title-inner">
-                        <h2>معرض الصور</h2>
+                        <h2>{{ __("text.gallery") }}</h2>
                     </div>
                     <section class="mbr-gallery mbr-slider-carousel cid-rPgRavP6AU" id="gallery2-9">
 
@@ -47,14 +47,14 @@
                                             <div>
 
 
-                                                <div class="mbr-gallery-item mbr-gallery-item--1" data-tags="جلود" data-video-url="false">
+                                                <div class="mbr-gallery-item mbr-gallery-item--1" data-tags="{{__("text.skins")}}" data-video-url="false">
                                                     <div data-toggle="modal" data-slide-to="0" href="#lb-gallery3-1">
                                                         <img title="" alt="" src="assets/images/beforeandafter/leather-dyeing-1412x2089-800x1184.jpg">
                                                         <span class="icon-focus">
                                                         </span>
                                                     </div>
                                                 </div>
-                                                <div class="mbr-gallery-item mbr-gallery-item--p1" data-tags="سجاد" data-video-url="false">
+                                                <div class="mbr-gallery-item mbr-gallery-item--p1" data-tags="{{ __("text.carpet") }}" data-video-url="false">
                                                     <div data-toggle="modal" data-slide-to="1" href="#lb-gallery3-1">
                                                         <img title="" alt="" src="assets/images/beforeandafter/b2a1-1080x1080-800x800.jpg">
                                                         <span class="icon-focus">
@@ -65,23 +65,23 @@
 
 
 
-                                                <div class="mbr-gallery-item mbr-gallery-item--p1" data-tags="أحذية" data-video-url="false">
+                                                <div class="mbr-gallery-item mbr-gallery-item--p1" data-tags="{{__("text.shoes") }}" data-video-url="false">
                                                     <div data-toggle="modal" data-slide-to="2" href="#lb-gallery3-1">
                                                         <img title="" alt="" src="assets/images/beforeandafter/b2a2-1080x1080-800x800.jpg"><span class="icon-focus"></span></div>
                                                 </div>
-                                                <div class="mbr-gallery-item mbr-gallery-item--p1" data-tags="أحذية" data-video-url="false">
+                                                <div class="mbr-gallery-item mbr-gallery-item--p1" data-tags="{{__("text.shoes") }}" data-video-url="false">
                                                     <div data-toggle="modal" data-slide-to="3" href="#lb-gallery3-1"><img title="" alt="" src="assets/images/beforeandafter/b2a5-1080x1080-800x800.jpg">
                                                         <span class="icon-focus"></span></div>
                                                 </div>
-                                                <div class="mbr-gallery-item mbr-gallery-item--p1" data-tags="مناشف" data-video-url="false">
+                                                <div class="mbr-gallery-item mbr-gallery-item--p1" data-tags="{{__("text.towel") }}" data-video-url="false">
                                                     <div data-toggle="modal" data-slide-to="4" href="#lb-gallery3-1"><img title="" alt="" src="assets/images/beforeandafter/b2a4-1080x1080-800x800.jpg">
                                                         <span class="icon-focus"></span></div>
                                                 </div>
-                                                <div class="mbr-gallery-item mbr-gallery-item--p1" data-tags="جلود" data-video-url="false">
+                                                <div class="mbr-gallery-item mbr-gallery-item--p1" data-tags="{{__("text.skins")}}" data-video-url="false">
                                                     <div data-toggle="modal" data-slide-to="5" href="#lb-gallery3-1"><img title="" alt="" src="assets/images/beforeandafter/b2a3-1080x1080-800x800.jpg">
                                                         <span class="icon-focus"></span></div>
                                                 </div>
-                                                <div class="mbr-gallery-item mbr-gallery-item--p1" data-tags="سجاد" data-video-url="false">
+                                                <div class="mbr-gallery-item mbr-gallery-item--p1" data-tags="{{ __("text.carpet") }}" data-video-url="false">
                                                     <div data-toggle="modal" data-slide-to="6" href="#lb-gallery3-1"><img title="" alt="" src="assets/images/beforeandafter/b2a6-1080x1080-800x800.jpg">
                                                         <span class="icon-focus"></span></div>
                                                 </div>

@@ -49,7 +49,8 @@ Route::get('/gallery', 'PagesController@Gallery')->name('gallery');
 Route::get('/shop', "ShopController@index")->name("shop");
 Route::post('/store', "ServiceController@StoreHome")->name("StoreHome");
 Route::get('/cart', "CartController@index")->name("cart");
-Route::patch('/cart-qty/{id}', "CartController@changeQuantity")->name("qty");
+Route::patch('/qty/{id}', "CartController@changeQuantity")->name("qty");
+Route::delete('/product/delete/{id}', "CartController@remove")->name("delete-product");
 
 Route::post('/addtocart', "CartController@add")->name("addtocart");
 Route::get('/checkout', "CheckoutController@index")->name("checkout");
@@ -67,6 +68,7 @@ Route::post('/save-profile', "UserController@store")->name("sprofile");
 Route::get('/product/{id}', "ShopController@product")->name("single");
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::post('/store-contact', "ServiceController@contact")->name("contact");
 
 
 

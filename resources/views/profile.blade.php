@@ -279,3 +279,15 @@
 
 </div>
 <!-- End  Main web  -->
+
+
+@section('extra_scripts')
+    <script>
+          axios.post('/post-contact',{name:'Kamal Abounaim'})
+        .then((response)=>{
+            console.log(response)
+        }).catch((error)=>{
+            console.log(error.response.data)
+        })
+    </script>
+@endsection

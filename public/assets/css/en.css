@@ -1,8 +1,11 @@
 html[dir="ltr"],
-html[dir="ltr"] body {
+html[dir="ltr"] body
+{
+    text-align: left !important;
+}
+html[dir= "ltr"] .details-products-block.block-details {
     text-align: left;
 }
-
 html[dir="ltr"] header .header-main .main-menu-block .main-menu li.dropdown a::after {
     margin-right: 0;
     margin-left: 8px;
@@ -95,4 +98,13 @@ html[dir="ltr"] .booking-service h2::after,
 html[dir="ltr"] .customers h2::after,
 html[dir="ltr"] .projects-block-home h2:after {
     transform: rotate(180deg);
+}
+
+html[dir="ltr"] footer {
+    text-align: left;
+}
+
+html[dir="ltr"] header .header-top .header-left .header-login ul li .icon-cart .number-item-cart {
+    right: -6px;
+    top: -12px;
 }

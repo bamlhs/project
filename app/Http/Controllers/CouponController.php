@@ -19,18 +19,15 @@ class CouponController extends Controller
     {
         $coupon = Coupon::where("coupoun", $request->coupon_code)->first();
 
-
         if(!$coupon){
             return redirect()->route('checkout')->withErrors("Invalid Coupon Code");
         }
-
 
         session()->put('coupon', [
             'name' =>$coupon->code,
             'discount' => $coupon->discount(Cart::subtotal())
         ]);
         return redirect()->route('checkout')->with("Success Message", "Coupon has been applied");
-
 
     }
 

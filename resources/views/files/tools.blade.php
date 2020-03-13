@@ -53,49 +53,14 @@
     </div>
 
     <!-- End Projects  -->
-
-
-    <!-- Videos Slider -->
-    <div class="booking-service videos-slider-block">
-        <div class="container wow  fadeInUp animated" data-wow-delay="0.3s">
-            <h2>Videos</h2>
-
-            <div class="videos-slider wow zoomIn animated " data-wow-delay="0.8s" dir="ltr">
-                <div class="item-video">
-                    <a href="https://www.youtube.com/embed/mrc_UtM2UsA" target="_blank">
-                        <iframe width="100%" height="270" src="https://www.youtube.com/embed/mrc_UtM2UsA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </a>
-                </div>
-
-                <div class="item-video">
-                    <a href="https://www.youtube.com/embed/mrc_UtM2UsA" target="_blank">
-                        <iframe width="100%" height="270" src="https://www.youtube.com/embed/mrc_UtM2UsA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </a>
-                </div>
-                <div class="item-video">
-                    <a href="https://www.youtube.com/embed/mrc_UtM2UsA" target="_blank">
-                        <iframe width="100%" height="270" src="https://www.youtube.com/embed/mrc_UtM2UsA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </a>
-                </div>
-
-                <div class="item-video">
-                    <a href="https://www.youtube.com/embed/mrc_UtM2UsA" target="_blank">
-                        <iframe width="100%" height="270" src="https://www.youtube.com/embed/mrc_UtM2UsA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </a>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- ِEnd Videos Slider -->
-
+ 
 
 
 
     <!-- Customers Bolck -->
     <div class="customers tools-customers">
         <div class="container">
-            <h2>our clients</h2>
+            <h2>{{__("text.clients")}}</h2>
             <div class="customers-service wow zoomIn animated " data-wow-delay="0.8s" dir="ltr">
                 <div class="item-custom">
                     <a href="#" target="_blank">
@@ -177,8 +142,7 @@
     <!-- Our Agents Bolck -->
     <div class="customers our-agents">
         <div class="container">
-            <h2>Our agents
-            </h2>
+            <h2>{{ __("text.agents") }}</h2>
             <div class="our-agents-service wow zoomIn animated " data-wow-delay="0.8s" dir="ltr">
                 <div class="item-custom">
                     <a href="#" target="_blank">
@@ -243,19 +207,7 @@
 
         </div>
     </div>
-    <!-- Our Agents Bolck -->
-
-    <!-- Mailing list right -->
-    <div class="mailing-list-right  animatable bounceInRight">
-        <div class="btn-colse-mail">X</div>
-        <div class="desc-mail-right">Subcsribe to get our offers</div>
-        <form>
-        <input type="email" class="form-control" placeholder="{{ __("text.emailOrphone") }}" />
-            <button type="submit" class="btn btn-primary">Subcsribe</button>
-        </form>
-    </div>
-    <!-- End Mailing list right -->
-
+   
 
     <!-- footer -->
 </div>

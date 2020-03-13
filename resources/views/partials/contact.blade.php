@@ -16,51 +16,54 @@
                                         </p>
                                         <div class="contactus-data">
                                             <span class="phone">
-                                                <img src="assets/images/support.svg" />
+                                                <img src="{{ asset('assets/images/support.svg') }}" />
                                                 920006848
                                             </span>
 
                                             <span class="email-w">
-                                                <img src="assets/images/email-w.svg" />
+                                                <img src="{{ asset('assets/images/email-w.svg') }}" />
                                                 info@alrahden.com
                                             </span>
 
                                             <span class="download-w">
-                                                <img src="assets/images/download-w.svg" />
+                                                <img src="{{ asset('assets/images/download-w.svg') }}" />
                                                 12345
                                             </span>
                                         </div>
                                     </div>
 
                                 </div>
-                                <div class="left-page">
+
+                            
+                                <div class="left-page" style="padding-top: 50px;">
                                     <div class="form-booking form-contactUs">
-                                        <form>
+                                        <form method="POST" action="{{ route('contact') }}">
+                                            @csrf
                                             <div class="row">
                                                 <div class="col form-group">
                                                     <label>{{ __('text.Name') }}</label>
-                                                    <input type="text" class="form-control" placeholder=">{{ __('text.Name') }}">
+                                                    <input type="text" class="form-control" name="name" value="{{ old("name")}}" placeholder="{{ __('text.Name') }}">
                                                 </div>
                                                 <div class="col form-group">
                                                     <label>{{ __('text.phone') }}</label>
-                                                    <input type="text" class="form-control" placeholder="{{ __('text.phone') }}">
+                                                    <input type="text" class="form-control" name="phone" value="{{ old("phone")}}" placeholder="{{ __('text.phone') }}">
                                                 </div>
                                             </div>
 
                                             <div class="row">
                                                 <div class="col form-group">
                                                     <label>{{ __('text.Mail') }}</label>
-                                                    <input type="email" class="form-control" placeholder="{{ __('text.Mail') }}">
+                                                    <input type="email" class="form-control" name="mail" value="{{ old("mail")}}" placeholder="{{ __('text.Mail') }}">
                                                 </div>
                                                 <div class="col form-group">
                                                     <label>{{ __('text.msg-title') }}</label>
-                                                    <input type="text" class="form-control" placeholder="{{ __('text.msg-title') }}">
+                                                    <input type="text" class="form-control"  name="subject" value="{{ old("subject")}}" placeholder="{{ __('text.msg-title') }}">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="inputState">{{ __('text.message') }}</label>message
-                                                <textarea class="form-control" rows="3" placeholder="{{ __('text.your-message') }}"></textarea>
+                                                <label for="inputState">{{ __('text.message') }}</label>
+                                                <textarea class="form-control" rows="3" name="msg" value="{{ old("msg")}}" placeholder="{{ __('text.your-message') }}"></textarea>
                                             </div>
                                             <button type="submit" class="btn btn-primary btn-booking">{{ __('text.send') }}</button>
                                         </form>

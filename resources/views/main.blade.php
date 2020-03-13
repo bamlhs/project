@@ -186,7 +186,7 @@
             </div>
         @endif
                 <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-            <input type="text" lass="form-control" placeholder="{{ __('text.Name')}}"  name="name" id="name" value="{{ old("name") }}">
+            <input type="text" class="form-control" placeholder="{{ __('text.Name')}}"  name="name" id="name" value="{{ old("name") }}">
                 <input type="text" name="phone" id="phone" class="form-control" placeholder="{{ __('text.phone')}}" value="{{ old("phone") }}">
                 <input type="text" class="form-control" placeholder="{{ __('text.address') }}"  name="address" id="address" value="{{ old("address") }}">
             <button type="submit" class="btn btn-primary" >{{ __("text.Reserve-Now") }}</button>
@@ -312,14 +312,14 @@
     <!-- End Customers Bolck -->
 
     <!-- Mailing list right -->
-    <div class="mailing-list-right  animatable bounceInRight">
+    {{-- <div class="mailing-list-right  animatable bounceInRight">
         <div class="btn-colse-mail">X</div>
     <div class="desc-mail-right">{{ __("text.subscribe-offers") }}</div>
         <form>
         <input type="email" class="form-control" placeholder="{{ __('text.emailOrphone') }}" />
             <button type="submit" class="btn btn-primary">إشترك</button>
         </form>
-    </div>
+    </div> --}}
     <!-- End Mailing list right -->
 
 

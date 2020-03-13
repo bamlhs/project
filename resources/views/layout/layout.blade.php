@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="icon" type="image/png" href="{{ asset("assets/images/favicon.png") }}">
     <title>مغاسل الرهدن | Alrahden</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="مغاسل الرهدن">
@@ -40,9 +40,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/mobirise/css/mbr-additional.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/en.css') }}">
 	{{-- <link type="text/css" rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto:400,300'> --}}
 	{{-- <link type="text/css" rel="stylesheet" href="/css/app.css"> --}}
-    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 	@yield('extra_styles')
 </head>
 <body>

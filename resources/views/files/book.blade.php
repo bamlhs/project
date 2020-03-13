@@ -1,7 +1,5 @@
 @extends('layout.layout')
 
-
-
 @section('content')
 
 <div class="main-web">
