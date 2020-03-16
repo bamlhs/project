@@ -30,3 +30,12 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
+    - name: SCP files
+      uses: horochx/deploy-via-scp@master
+      with:
+        local: localPath # eg: dist
+        remote: ${{ secrets.REMOTE }} # eg: /home/github-action
+        host: ${{ secrets.HOST }} # eg: example.com
+        port: ${{ secrets.PORT }} # eg: 22
+        user: ${{ secrets.USER }} # eg: github-action
+        key: ${{ secrets.KEY }} #
