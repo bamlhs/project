@@ -2,25 +2,25 @@ name: Laravel
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   laravel-tests:
-
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/checkout@v2
-    - name: SCP files
-      uses: bamlhs/deploy-via-scp@master
-      run: ls -alh
-      run: pwd
-      with:
-        local: "*" # eg: dist
-        remote: ${{ secrets.REMOTE }} # eg: /home/github-action
-        host: ${{ secrets.HOST }} # eg: example.com
-        port: ${{ secrets.PORT }} # eg: 22
-        user: ${{ secrets.USERNAME }} # eg: github-action
-        key: ${{ secrets.KEY }}
+      - uses: actions/checkout@v2
+      - name: SCP files
+        uses: bamlhs/deploy-via-scp@master
+        run: |
+          ls -alh
+          pwd
+        with:
+          local: "*" # eg: dist
+          remote: ${{ secrets.REMOTE }} # eg: /home/github-action
+          host: ${{ secrets.HOST }} # eg: example.com
+          port: ${{ secrets.PORT }} # eg: 22
+          user: ${{ secrets.USERNAME }} # eg: github-action
+          key: ${{ secrets.KEY }}
