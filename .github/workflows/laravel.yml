@@ -13,7 +13,6 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
-    - name: Copy .env
     - name: SCP files
       uses: bamlhs/deploy-via-scp@master
       run: ls -alh
