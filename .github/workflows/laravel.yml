@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: SCP files code dt
+      - name: SCP files code dtd
         uses: bamlhs/deploy-via-scp@master
         with:
           local: "*" # eg: dist
